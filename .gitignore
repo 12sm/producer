@@ -1,3 +1,19 @@
 __pycache__/
 *.pyc
 *.pyo
+
+# Audio files — too large for git
+*.mp3
+*.wav
+*.flac
+*.ogg
+*.m4a
+suno_audio/
+lab_out/
+
+# Secrets
+suno_jwt.txt
+
+# UI
+ui/node_modules/
+ui/dist/

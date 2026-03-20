@@ -1,0 +1,86 @@
+{
+  "run_id": "20260320_045834_08eed1",
+  "timestamp": "2026-03-20T04:58:34.106150+00:00",
+  "original_path": "/home/michael/producer-repo/test_original.wav",
+  "variant_path": "/home/michael/producer-repo/test_variant2.wav",
+  "prompt_text": "",
+  "intent": "tighter kick",
+  "source": "manual",
+  "brackets": [
+    {
+      "start": 10.0,
+      "end": 20.0
+    }
+  ],
+  "anchors": [],
+  "bracket_results": [
+    {
+      "window": "0:10-0:20",
+      "start": 10.0,
+      "end": 20.0,
+      "original_features": {
+        "rms_mean": 0.247662,
+        "rms_std": 0.004709,
+        "centroid_mean": 3953.3,
+        "centroid_std": 71.2,
+        "onset_strength_mean": 0.7794,
+        "onset_density": 5.2,
+        "tempo": 123.0
+      },
+      "variant_features": {
+        "rms_mean": 0.329105,
+        "rms_std": 0.008419,
+        "centroid_mean": 4441.07,
+        "centroid_std": 279.15,
+        "onset_strength_mean": 0.8714,
+        "onset_density": 3.5,
+        "tempo": 117.5
+      },
+      "deltas": {
+        "rms_mean": 0.3288,
+        "rms_std": 0.7879,
+        "centroid_mean": 0.1234,
+        "centroid_std": 2.9206,
+        "onset_strength_mean": 0.118,
+        "onset_density": -0.3269,
+        "tempo": -0.0447
+      },
+      "compliance": {
+        "score": 0.0,
+        "confidence": 0.333,
+        "verdict": "FAIL",
+        "matched_rules": [
+          {
+            "keyword": "tight",
+            "feature": "onset_density",
+            "expected": "increase",
+            "actual_delta": -0.3269,
+            "met": false
+          },
+          {
+            "keyword": "tight",
+            "feature": "rms_std",
+            "expected": "decrease",
+            "actual_delta": 0.7879,
+            "met": false
+          }
+        ],
+        "explanation": "Missed 2 expectation(s): tight\u2192onset_density, tight\u2192rms_std"
+      },
+      "notes": {
+        "window": "0:10-0:20",
+        "what_changed": "Region is louder (33% change in RMS); More dynamic range / less consistent level; Spectral balance shifted brighter; Sparser rhythm (33% fewer onsets/sec); Tempo shifted: 123 \u2192 118 BPM",
+        "what_improved": "No clear improvements aligned with intent detected",
+        "what_got_worse": "Large loudness shift (louder) \u2014 may be unintended",
+        "suggested_tweak": "For 'tight', try: '16th-note', 'rapid', 'fill every beat'"
+      }
+    }
+  ],
+  "drift": {
+    "per_anchor": [],
+    "overall_drift": 0.0,
+    "verdict": "LOW"
+  },
+  "slice_files": [],
+  "bank_dir": "./snippet_bank"
+}

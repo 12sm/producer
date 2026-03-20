@@ -1,0 +1,394 @@
+[
+  {
+    "id": "1A",
+    "batch": 1,
+    "submissions": 2,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "Walking through the city lights again\nEvery street a story I can't explain\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\nThe morning finds me halfway home\nStatic on the radio, dancing alone\nBut the beat keeps going, the bass stays low\nAnd I'm still chasing what I'll never know\n\nOne last time before the silence calls\nLet the music carry through these walls",
+    "bracket_desc": "No brackets (control)",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "367276e5-9b70-4907-8515-1a522bac25c0",
+          "53311de9-becb-4e61-83e3-ebb309377fc8"
+        ]
+      },
+      "sub2": {
+        "clip_ids": [
+          "f978d303-1fd7-4282-a89b-7be19720f158",
+          "b7a949f6-6606-4f0a-97e3-4c59cf578688"
+        ]
+      }
+    }
+  },
+  {
+    "id": "1B",
+    "batch": 1,
+    "submissions": 2,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Verse 1]\nWalking through the city lights again\nEvery street a story I can't explain\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\n[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Verse 2]\nThe morning finds me halfway home\nStatic on the radio, dancing alone\nBut the beat keeps going, the bass stays low\nAnd I'm still chasing what I'll never know\n\n[Outro]\nOne last time before the silence calls\nLet the music carry through these walls",
+    "bracket_desc": "Standard brackets [Verse 1/Chorus/Verse 2/Outro]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "b61ca17a-78ad-4b0f-be20-859520d1b168",
+          "4dd71159-23eb-4c2b-a1c2-2211241111fb"
+        ]
+      },
+      "sub2": {
+        "clip_ids": [
+          "0eca567f-28b2-47ea-ae69-6f515a33bfd1",
+          "0139f452-0a3f-4337-a3db-f3abb04f1163"
+        ]
+      }
+    }
+  },
+  {
+    "id": "1C",
+    "batch": 1,
+    "submissions": 2,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Chorus]\nWalking through the city lights again\nEvery street a story I can't explain\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\n[Verse 1]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Outro]\nThe morning finds me halfway home\nStatic on the radio, dancing alone\nBut the beat keeps going, the bass stays low\nAnd I'm still chasing what I'll never know\n\n[Verse 2]\nOne last time before the silence calls\nLet the music carry through these walls",
+    "bracket_desc": "Wrong order brackets (Chorus/Verse1/Outro/Verse2)",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "f623c0e5-0d30-4e82-864c-dfaa365be553",
+          "17117b44-ce65-43e6-a552-a2f61a4890bc"
+        ]
+      },
+      "sub2": {
+        "clip_ids": [
+          "72ee45c7-062b-4b0d-a14f-f0cf896a573e",
+          "7f0508d6-eeb7-443c-805c-e1f77a0bd9ea"
+        ]
+      }
+    }
+  },
+  {
+    "id": "2A",
+    "batch": 2,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Intro]\n[Verse 1]\nWalking through the city lights again\nEvery street a story I can't explain\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\n[Pre-Chorus]\nThe neon hums a melody I know\n\n[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Bridge]\nThe morning finds me halfway home\nStatic on the radio, dancing alone\n\n[Chorus]\nBut the beat keeps going, the bass stays low\nAnd I'm still chasing what I'll never know\n\n[Outro]\nOne last time before the silence calls\nLet the music carry through these walls",
+    "bracket_desc": "Full standard structure [Intro/Verse1/Pre-Chorus/Chorus/Bridge/Chorus/Outro]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "e963572b-f817-4303-ad0e-07da3c37b2d2",
+          "24672c26-0ca0-4fca-8f3a-ce83e3a15607"
+        ]
+      }
+    }
+  },
+  {
+    "id": "2B",
+    "batch": 2,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Build]\nWalking through the city lights again\nEvery street a story I can't explain\n\n[Drop]\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\n[Break]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\n\n[Drop]\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Outro]\nOne last time before the silence calls\nLet the music carry through these walls",
+    "bracket_desc": "EDM-style [Build/Drop/Break/Drop/Outro]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "52bef2db-da6c-46ca-9ccf-d6bddc2acbf0",
+          "3dff9b04-58c3-4d89-bd2a-79a50cbd2ff8"
+        ]
+      }
+    }
+  },
+  {
+    "id": "2C",
+    "batch": 2,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Verse 1]\nWalking through the city lights again\nEvery street a story I can't explain\n\n[Hook]\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\n[Verse 2]\nThe morning finds me halfway home\nStatic on the radio, dancing alone\n\n[Hook]\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Fade Out]",
+    "bracket_desc": "Hook-centric [Verse1/Hook/Verse2/Hook/Fade Out]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "e5f41f30-4a27-4b9f-8ca7-0d3cfd6237f1",
+          "258394b5-95c0-4f12-b16a-7ab2accd5d5d"
+        ]
+      }
+    }
+  },
+  {
+    "id": "2D",
+    "batch": 2,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Verse 1]\nWalking through the city lights again\nEvery street a story I can't explain\n\n[Interlude]\n\n[Verse 2]\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\n[Interlude]\n\n[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Outro]\nOne last time before the silence calls\nLet the music carry through these walls",
+    "bracket_desc": "Interlude test [Verse1/Interlude/Verse2/Interlude/Chorus/Outro]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "9d8a46f2-1a56-4462-b2a6-a0f811eadd57",
+          "a98f02c5-4085-41ba-bc5d-3f1e6a51db31"
+        ]
+      }
+    }
+  },
+  {
+    "id": "3A",
+    "batch": 3,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze",
+    "bracket_desc": "[Verse] control",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "2966c978-caf1-42d2-8c1c-84b554d2790f",
+          "c1397376-9d75-481e-8200-73e916e4ffb6"
+        ]
+      }
+    }
+  },
+  {
+    "id": "3B",
+    "batch": 3,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Soft Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze",
+    "bracket_desc": "[Soft Verse]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "ba843e95-423d-472e-8e91-89473b1710c3",
+          "9b2d6162-efe8-415c-885a-783bab4e386e"
+        ]
+      }
+    }
+  },
+  {
+    "id": "3C",
+    "batch": 3,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Whispered Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze",
+    "bracket_desc": "[Whispered Verse]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "297b03ad-a87d-4c48-86e2-fcda12c7db10",
+          "08d38764-b1cc-4a90-a9d5-b1f08724fc74"
+        ]
+      }
+    }
+  },
+  {
+    "id": "3D",
+    "batch": 3,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Spoken Word]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze",
+    "bracket_desc": "[Spoken Word]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "7d403ca3-e76b-46c8-a483-df5b89f18a7a",
+          "ef3f37a6-e8d9-46ae-a9cc-120089abe249"
+        ]
+      }
+    }
+  },
+  {
+    "id": "3E",
+    "batch": 3,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Guitar Solo]\n\n[Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze",
+    "bracket_desc": "[Guitar Solo] then [Verse]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "15d70691-3a10-46fb-b5c8-babb2ec2be44",
+          "29449153-9f2c-4061-b332-ae4fa898b72d"
+        ]
+      }
+    }
+  },
+  {
+    "id": "3F",
+    "batch": 3,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Instrumental Break]\n\n[Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze",
+    "bracket_desc": "[Instrumental Break] then [Verse]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "dccc2f25-0c63-4eca-be78-ba15e70d2fe3",
+          "dabffe7f-0216-4ba5-8e70-921fceb86bf2"
+        ]
+      }
+    }
+  },
+  {
+    "id": "3G",
+    "batch": 3,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze\n\n[Guitar Solo]",
+    "bracket_desc": "[Verse] then [Guitar Solo]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "50ebdf2f-1074-422b-9bfc-fefe2cf228df",
+          "81abe51f-6e9d-434c-8b09-155b552b6d93"
+        ]
+      }
+    }
+  },
+  {
+    "id": "3H",
+    "batch": 3,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Verse | Key Change]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze",
+    "bracket_desc": "[Verse | Key Change]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "bd52d6cd-c60c-490c-a356-023431c3a9dd",
+          "1167dee0-c6d2-4d71-93ea-bd8e4a348752"
+        ]
+      }
+    }
+  },
+  {
+    "id": "4A",
+    "batch": 4,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze\n\n[Bass Drop]",
+    "bracket_desc": "[Verse] then [Bass Drop]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "3556cd41-2239-47c6-bb4a-013cb19b5f6e",
+          "12b0b8fd-0f46-4f48-9008-1b43d2f7d08a"
+        ]
+      }
+    }
+  },
+  {
+    "id": "4B",
+    "batch": 4,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\n\n[Silence]\n\n[Chorus]\nThe water moves but never really leaves\nLike every promise tangled in the breeze",
+    "bracket_desc": "[Verse] [Silence] [Chorus]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "61a26242-10c4-45fe-a28b-2e53d19b1867",
+          "9268a704-7165-4a18-adea-872b36b4af48"
+        ]
+      }
+    }
+  },
+  {
+    "id": "4C",
+    "batch": 4,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\n\n[Ethereal Breakdown]\n\n[Chorus]\nThe water moves but never really leaves\nLike every promise tangled in the breeze",
+    "bracket_desc": "Made-up tag [Ethereal Breakdown]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "6d0c092e-6393-4e93-919e-f021c0f8d399",
+          "b97e08e9-3869-4de0-ae50-811b72a604ff"
+        ]
+      }
+    }
+  },
+  {
+    "id": "4D",
+    "batch": 4,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\n\n[Chaos Section]\n\n[Chorus]\nThe water moves but never really leaves\nLike every promise tangled in the breeze",
+    "bracket_desc": "Made-up tag [Chaos Section]",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "4fc39818-70ba-427b-9ae0-9e4060ef0707",
+          "c22481e8-1d55-4151-8cf6-d5127edeb7b8"
+        ]
+      }
+    }
+  },
+  {
+    "id": "4E",
+    "batch": 4,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take",
+    "bracket_desc": "[Chorus] repeated 4x",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "b909e5b7-d490-4d9c-9882-82a3a14473bb",
+          "71d70c10-3af8-42d8-8a9b-e3842c03680c"
+        ]
+      }
+    }
+  },
+  {
+    "id": "4F",
+    "batch": 4,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Verse]\nSTEEL AND GLASS REFLECTING COLD DECEMBER\nFOOTSTEPS ON THE BRIDGE I STILL REMEMBER",
+    "bracket_desc": "ALL CAPS lyrics",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "de1a0d82-9313-46a1-aa0b-29a35eb0b7a1",
+          "e12c7dc9-b53c-4019-bc02-7cb3bfbdd875"
+        ]
+      }
+    }
+  },
+  {
+    "id": "4G",
+    "batch": 4,
+    "submissions": 1,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Chorus]\nTurn it up and let the whole thing break (let it break)\nThis is every chance I'm gonna take (gonna take)",
+    "bracket_desc": "Parentheses backup vocals",
+    "status": "done",
+    "results": {
+      "sub1": {
+        "clip_ids": [
+          "17fed75b-34ed-4909-9517-c506cbbcec6b",
+          "182c35f9-4277-45fc-8904-0fcb5f879ca7"
+        ]
+      }
+    }
+  }
+]

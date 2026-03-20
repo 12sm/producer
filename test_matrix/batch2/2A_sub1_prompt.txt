@@ -1,0 +1,32 @@
+CONDITION: 2A — Full standard structure [Intro/Verse1/Pre-Chorus/Chorus/Bridge/Chorus/Outro]
+STYLE: indie rock, male vocals, 120 bpm
+MODEL: Suno v5 (chirp-crow)
+
+LYRICS:
+[Intro]
+[Verse 1]
+Walking through the city lights again
+Every street a story I can't explain
+The neon hums a melody I know
+A rhythm pulling me where I need to go
+
+[Pre-Chorus]
+The neon hums a melody I know
+
+[Chorus]
+I'm caught in the echo of what we made
+A sound that doesn't falter, doesn't fade
+Turn it up and let the whole thing break
+This is every chance I'm gonna take
+
+[Bridge]
+The morning finds me halfway home
+Static on the radio, dancing alone
+
+[Chorus]
+But the beat keeps going, the bass stays low
+And I'm still chasing what I'll never know
+
+[Outro]
+One last time before the silence calls
+Let the music carry through these walls

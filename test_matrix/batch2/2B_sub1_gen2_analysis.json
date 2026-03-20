@@ -1,0 +1,121 @@
+{
+  "run_id": "20260320_134537_429564",
+  "timestamp": "2026-03-20T13:45:37.945797+00:00",
+  "original_path": "/home/michael/producer-repo/test_matrix/batch1/1A_sub1_gen1.mp3",
+  "variant_path": "/home/michael/producer-repo/test_matrix/batch2/2B_sub1_gen2.mp3",
+  "prompt_text": "[Build]\nWalking through the city lights again\nEvery street a story I can't explain\n\n[Drop]\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\n[Break]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\n\n[Drop]\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Outro]\nOne last time before the silence calls\nLet the music carry through these walls",
+  "intent": "EDM-style [Build/Drop/Break/Drop/Outro]",
+  "source": "suno",
+  "brackets": [
+    {
+      "start": 10.0,
+      "end": 50.0
+    },
+    {
+      "start": 50.0,
+      "end": 90.0
+    }
+  ],
+  "anchors": [],
+  "bracket_results": [
+    {
+      "window": "0:10-0:50",
+      "start": 10.0,
+      "end": 50.0,
+      "original_features": {
+        "rms_mean": 0.150365,
+        "rms_std": 0.054598,
+        "centroid_mean": 2506.22,
+        "centroid_std": 1036.87,
+        "onset_strength_mean": 1.5665,
+        "onset_density": 3.83,
+        "tempo": 117.5
+      },
+      "variant_features": {
+        "rms_mean": 0.150254,
+        "rms_std": 0.055294,
+        "centroid_mean": 2420.61,
+        "centroid_std": 746.37,
+        "onset_strength_mean": 1.2605,
+        "onset_density": 2.85,
+        "tempo": 117.5
+      },
+      "deltas": {
+        "rms_mean": -0.0007,
+        "rms_std": 0.0127,
+        "centroid_mean": -0.0342,
+        "centroid_std": -0.2802,
+        "onset_strength_mean": -0.1953,
+        "onset_density": -0.2559,
+        "tempo": 0.0
+      },
+      "compliance": {
+        "score": 0.5,
+        "confidence": 0.0,
+        "verdict": "MIXED",
+        "matched_rules": [],
+        "explanation": "No keyword rules matched the intent text. Score is neutral."
+      },
+      "notes": {
+        "window": "0:10-0:50",
+        "what_changed": "Sparser rhythm (26% fewer onsets/sec)",
+        "what_improved": "No clear improvements aligned with intent detected",
+        "what_got_worse": "No obvious artifacts or regressions detected",
+        "suggested_tweak": "Try being more specific with production terminology in the bracket prompt"
+      }
+    },
+    {
+      "window": "0:50-1:30",
+      "start": 50.0,
+      "end": 90.0,
+      "original_features": {
+        "rms_mean": 0.201296,
+        "rms_std": 0.038978,
+        "centroid_mean": 2951.39,
+        "centroid_std": 753.59,
+        "onset_strength_mean": 1.1222,
+        "onset_density": 3.83,
+        "tempo": 117.5
+      },
+      "variant_features": {
+        "rms_mean": 0.210531,
+        "rms_std": 0.055874,
+        "centroid_mean": 2480.26,
+        "centroid_std": 862.11,
+        "onset_strength_mean": 1.2346,
+        "onset_density": 3.48,
+        "tempo": 117.5
+      },
+      "deltas": {
+        "rms_mean": 0.0459,
+        "rms_std": 0.4335,
+        "centroid_mean": -0.1596,
+        "centroid_std": 0.144,
+        "onset_strength_mean": 0.1002,
+        "onset_density": -0.0914,
+        "tempo": 0.0
+      },
+      "compliance": {
+        "score": 0.5,
+        "confidence": 0.0,
+        "verdict": "MIXED",
+        "matched_rules": [],
+        "explanation": "No keyword rules matched the intent text. Score is neutral."
+      },
+      "notes": {
+        "window": "0:50-1:30",
+        "what_changed": "More dynamic range / less consistent level; Spectral balance shifted darker/warmer; Sparser rhythm (9% fewer onsets/sec)",
+        "what_improved": "No clear improvements aligned with intent detected",
+        "what_got_worse": "No obvious artifacts or regressions detected",
+        "suggested_tweak": "Try being more specific with production terminology in the bracket prompt"
+      }
+    }
+  ],
+  "drift": {
+    "per_anchor": [],
+    "overall_drift": 0.0,
+    "verdict": "LOW"
+  },
+  "slice_files": [],
+  "bank_dir": "./snippet_bank"
+}

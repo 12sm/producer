@@ -92,20 +92,16 @@ export default function SessionDetail() {
               />
 
               <div className="bg-surface border border-border rounded-lg p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-bold">
-                      #{it.iteration}
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2">
+                  <span className="text-sm font-bold">#{it.iteration}</span>
+                  <ComplianceBadge verdict={it.compliance_verdict} />
+                  <DriftBadge verdict={it.drift_verdict} />
+                  {isAccepted && (
+                    <span className="text-pass text-xs font-bold">
+                      ★ accepted
                     </span>
-                    <ComplianceBadge verdict={it.compliance_verdict} />
-                    <DriftBadge verdict={it.drift_verdict} />
-                    {isAccepted && (
-                      <span className="text-pass text-xs font-bold">
-                        ★ accepted
-                      </span>
-                    )}
-                  </div>
-                  <span className="text-xs text-text-muted">
+                  )}
+                  <span className="text-xs text-text-muted ml-auto">
                     {new Date(it.timestamp).toLocaleString()}
                   </span>
                 </div>

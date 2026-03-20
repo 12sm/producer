@@ -1,0 +1,121 @@
+{
+  "run_id": "20260320_134922_22ce49",
+  "timestamp": "2026-03-20T13:49:22.565424+00:00",
+  "original_path": "/home/michael/producer-repo/test_matrix/batch1/1A_sub1_gen1.mp3",
+  "variant_path": "/home/michael/producer-repo/test_matrix/batch4/4B_sub1_gen1.mp3",
+  "prompt_text": "[Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\n\n[Silence]\n\n[Chorus]\nThe water moves but never really leaves\nLike every promise tangled in the breeze",
+  "intent": "[Verse] [Silence] [Chorus]",
+  "source": "suno",
+  "brackets": [
+    {
+      "start": 10.0,
+      "end": 50.0
+    },
+    {
+      "start": 50.0,
+      "end": 90.0
+    }
+  ],
+  "anchors": [],
+  "bracket_results": [
+    {
+      "window": "0:10-0:50",
+      "start": 10.0,
+      "end": 50.0,
+      "original_features": {
+        "rms_mean": 0.150365,
+        "rms_std": 0.054598,
+        "centroid_mean": 2506.22,
+        "centroid_std": 1036.87,
+        "onset_strength_mean": 1.5665,
+        "onset_density": 3.83,
+        "tempo": 117.5
+      },
+      "variant_features": {
+        "rms_mean": 0.155818,
+        "rms_std": 0.068582,
+        "centroid_mean": 2409.85,
+        "centroid_std": 1073.89,
+        "onset_strength_mean": 1.4536,
+        "onset_density": 3.4,
+        "tempo": 117.5
+      },
+      "deltas": {
+        "rms_mean": 0.0363,
+        "rms_std": 0.2561,
+        "centroid_mean": -0.0385,
+        "centroid_std": 0.0357,
+        "onset_strength_mean": -0.0721,
+        "onset_density": -0.1123,
+        "tempo": 0.0
+      },
+      "compliance": {
+        "score": 0.5,
+        "confidence": 0.0,
+        "verdict": "MIXED",
+        "matched_rules": [],
+        "explanation": "No keyword rules matched the intent text. Score is neutral."
+      },
+      "notes": {
+        "window": "0:10-0:50",
+        "what_changed": "More dynamic range / less consistent level; Sparser rhythm (11% fewer onsets/sec)",
+        "what_improved": "No clear improvements aligned with intent detected",
+        "what_got_worse": "No obvious artifacts or regressions detected",
+        "suggested_tweak": "Try being more specific with production terminology in the bracket prompt"
+      }
+    },
+    {
+      "window": "0:50-1:30",
+      "start": 50.0,
+      "end": 90.0,
+      "original_features": {
+        "rms_mean": 0.201296,
+        "rms_std": 0.038978,
+        "centroid_mean": 2951.39,
+        "centroid_std": 753.59,
+        "onset_strength_mean": 1.1222,
+        "onset_density": 3.83,
+        "tempo": 117.5
+      },
+      "variant_features": {
+        "rms_mean": 0.175219,
+        "rms_std": 0.056537,
+        "centroid_mean": 2413.04,
+        "centroid_std": 1083.7,
+        "onset_strength_mean": 1.7204,
+        "onset_density": 4.05,
+        "tempo": 117.5
+      },
+      "deltas": {
+        "rms_mean": -0.1295,
+        "rms_std": 0.4505,
+        "centroid_mean": -0.1824,
+        "centroid_std": 0.438,
+        "onset_strength_mean": 0.5331,
+        "onset_density": 0.0574,
+        "tempo": 0.0
+      },
+      "compliance": {
+        "score": 0.5,
+        "confidence": 0.0,
+        "verdict": "MIXED",
+        "matched_rules": [],
+        "explanation": "No keyword rules matched the intent text. Score is neutral."
+      },
+      "notes": {
+        "window": "0:50-1:30",
+        "what_changed": "Region is quieter (13% change in RMS); More dynamic range / less consistent level; Spectral balance shifted darker/warmer; Busier rhythm (6% more onsets/sec)",
+        "what_improved": "No clear improvements aligned with intent detected",
+        "what_got_worse": "No obvious artifacts or regressions detected",
+        "suggested_tweak": "Try being more specific with production terminology in the bracket prompt"
+      }
+    }
+  ],
+  "drift": {
+    "per_anchor": [],
+    "overall_drift": 0.0,
+    "verdict": "LOW"
+  },
+  "slice_files": [],
+  "bank_dir": "./snippet_bank"
+}

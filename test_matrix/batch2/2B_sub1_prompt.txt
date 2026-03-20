@@ -1,0 +1,24 @@
+CONDITION: 2B — EDM-style structure [Build/Drop/Break/Drop/Outro]
+STYLE: indie rock, male vocals, 120 bpm
+MODEL: Suno v5 (chirp-crow)
+
+LYRICS:
+[Build]
+Walking through the city lights again
+Every street a story I can't explain
+
+[Drop]
+The neon hums a melody I know
+A rhythm pulling me where I need to go
+
+[Break]
+I'm caught in the echo of what we made
+A sound that doesn't falter, doesn't fade
+
+[Drop]
+Turn it up and let the whole thing break
+This is every chance I'm gonna take
+
+[Outro]
+One last time before the silence calls
+Let the music carry through these walls

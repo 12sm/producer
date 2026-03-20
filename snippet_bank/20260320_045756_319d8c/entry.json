@@ -1,0 +1,86 @@
+{
+  "run_id": "20260320_045756_319d8c",
+  "timestamp": "2026-03-20T04:57:56.297079+00:00",
+  "original_path": "/home/michael/producer-repo/test_original.wav",
+  "variant_path": "/home/michael/producer-repo/test_variant2.wav",
+  "prompt_text": "",
+  "intent": "brighter hi-hats, crisp",
+  "source": "manual",
+  "brackets": [
+    {
+      "start": 10.0,
+      "end": 20.0
+    }
+  ],
+  "anchors": [],
+  "bracket_results": [
+    {
+      "window": "0:10-0:20",
+      "start": 10.0,
+      "end": 20.0,
+      "original_features": {
+        "rms_mean": 0.247662,
+        "rms_std": 0.004709,
+        "centroid_mean": 3953.3,
+        "centroid_std": 71.2,
+        "onset_strength_mean": 0.7794,
+        "onset_density": 5.2,
+        "tempo": 123.0
+      },
+      "variant_features": {
+        "rms_mean": 0.329105,
+        "rms_std": 0.008419,
+        "centroid_mean": 4441.07,
+        "centroid_std": 279.15,
+        "onset_strength_mean": 0.8714,
+        "onset_density": 3.5,
+        "tempo": 117.5
+      },
+      "deltas": {
+        "rms_mean": 0.3288,
+        "rms_std": 0.7879,
+        "centroid_mean": 0.1234,
+        "centroid_std": 2.9206,
+        "onset_strength_mean": 0.118,
+        "onset_density": -0.3269,
+        "tempo": -0.0447
+      },
+      "compliance": {
+        "score": 1.0,
+        "confidence": 0.667,
+        "verdict": "PASS",
+        "matched_rules": [
+          {
+            "keyword": "brighter",
+            "feature": "centroid_mean",
+            "expected": "increase",
+            "actual_delta": 0.1234,
+            "met": true
+          },
+          {
+            "keyword": "crisp",
+            "feature": "centroid_mean",
+            "expected": "increase",
+            "actual_delta": 0.1234,
+            "met": true
+          }
+        ],
+        "explanation": "Met 2 expectation(s): brighter\u2192centroid_mean, crisp\u2192centroid_mean"
+      },
+      "notes": {
+        "window": "0:10-0:20",
+        "what_changed": "Region is louder (33% change in RMS); More dynamic range / less consistent level; Spectral balance shifted brighter; Sparser rhythm (33% fewer onsets/sec); Tempo shifted: 123 \u2192 118 BPM",
+        "what_improved": "Brighter tone aligns with intent",
+        "what_got_worse": "Large loudness shift (louder) \u2014 may be unintended",
+        "suggested_tweak": "Current prompt is working well. Consider locking this snippet and testing edge cases."
+      }
+    }
+  ],
+  "drift": {
+    "per_anchor": [],
+    "overall_drift": 0.0,
+    "verdict": "LOW"
+  },
+  "slice_files": [],
+  "bank_dir": "./snippet_bank"
+}

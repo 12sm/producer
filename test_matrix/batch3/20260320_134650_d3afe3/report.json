@@ -1,0 +1,137 @@
+{
+  "run_id": "20260320_134650_d3afe3",
+  "timestamp": "2026-03-20T13:46:50.308580+00:00",
+  "original_path": "/home/michael/producer-repo/test_matrix/batch1/1A_sub1_gen1.mp3",
+  "variant_path": "/home/michael/producer-repo/test_matrix/batch3/3B_sub1_gen1.mp3",
+  "prompt_text": "[Soft Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze",
+  "intent": "[Soft Verse]",
+  "source": "suno",
+  "brackets": [
+    {
+      "start": 10.0,
+      "end": 50.0
+    },
+    {
+      "start": 50.0,
+      "end": 90.0
+    }
+  ],
+  "anchors": [],
+  "bracket_results": [
+    {
+      "window": "0:10-0:50",
+      "start": 10.0,
+      "end": 50.0,
+      "original_features": {
+        "rms_mean": 0.150365,
+        "rms_std": 0.054598,
+        "centroid_mean": 2506.22,
+        "centroid_std": 1036.87,
+        "onset_strength_mean": 1.5665,
+        "onset_density": 3.83,
+        "tempo": 117.5
+      },
+      "variant_features": {
+        "rms_mean": 0.141913,
+        "rms_std": 0.070676,
+        "centroid_mean": 1659.77,
+        "centroid_std": 675.26,
+        "onset_strength_mean": 1.3203,
+        "onset_density": 2.77,
+        "tempo": 117.5
+      },
+      "deltas": {
+        "rms_mean": -0.0562,
+        "rms_std": 0.2945,
+        "centroid_mean": -0.3377,
+        "centroid_std": -0.3488,
+        "onset_strength_mean": -0.1572,
+        "onset_density": -0.2768,
+        "tempo": 0.0
+      },
+      "compliance": {
+        "score": 1.0,
+        "confidence": 0.333,
+        "verdict": "PASS",
+        "matched_rules": [
+          {
+            "keyword": "soft",
+            "feature": "rms_mean",
+            "expected": "decrease",
+            "actual_delta": -0.0562,
+            "met": true
+          }
+        ],
+        "explanation": "Met 1 expectation(s): soft\u2192rms_mean"
+      },
+      "notes": {
+        "window": "0:10-0:50",
+        "what_changed": "Region is quieter (6% change in RMS); More dynamic range / less consistent level; Spectral balance shifted darker/warmer; Sparser rhythm (28% fewer onsets/sec)",
+        "what_improved": "Quieter dynamics align with intent",
+        "what_got_worse": "Large spectral shift (darker/warmer) \u2014 check for tonal artifacts",
+        "suggested_tweak": "Current prompt is working well. Consider locking this snippet and testing edge cases."
+      }
+    },
+    {
+      "window": "0:50-1:30",
+      "start": 50.0,
+      "end": 90.0,
+      "original_features": {
+        "rms_mean": 0.201296,
+        "rms_std": 0.038978,
+        "centroid_mean": 2951.39,
+        "centroid_std": 753.59,
+        "onset_strength_mean": 1.1222,
+        "onset_density": 3.83,
+        "tempo": 117.5
+      },
+      "variant_features": {
+        "rms_mean": 0.078196,
+        "rms_std": 0.058479,
+        "centroid_mean": 1438.7,
+        "centroid_std": 697.25,
+        "onset_strength_mean": 0.7826,
+        "onset_density": 0.81,
+        "tempo": 123.0
+      },
+      "deltas": {
+        "rms_mean": -0.6115,
+        "rms_std": 0.5003,
+        "centroid_mean": -0.5125,
+        "centroid_std": -0.0748,
+        "onset_strength_mean": -0.3026,
+        "onset_density": -0.7885,
+        "tempo": 0.0468
+      },
+      "compliance": {
+        "score": 1.0,
+        "confidence": 0.333,
+        "verdict": "PASS",
+        "matched_rules": [
+          {
+            "keyword": "soft",
+            "feature": "rms_mean",
+            "expected": "decrease",
+            "actual_delta": -0.6115,
+            "met": true
+          }
+        ],
+        "explanation": "Met 1 expectation(s): soft\u2192rms_mean"
+      },
+      "notes": {
+        "window": "0:50-1:30",
+        "what_changed": "Region is quieter (61% change in RMS); More dynamic range / less consistent level; Spectral balance shifted darker/warmer; Sparser rhythm (79% fewer onsets/sec); Tempo shifted: 118 \u2192 123 BPM",
+        "what_improved": "Quieter dynamics align with intent",
+        "what_got_worse": "Large spectral shift (darker/warmer) \u2014 check for tonal artifacts",
+        "suggested_tweak": "Current prompt is working well. Consider locking this snippet and testing edge cases."
+      }
+    }
+  ],
+  "drift": {
+    "per_anchor": [],
+    "overall_drift": 0.0,
+    "verdict": "LOW"
+  },
+  "slice_files": [],
+  "bank_dir": "./snippet_bank"
+}

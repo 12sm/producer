@@ -1,0 +1,121 @@
+{
+  "run_id": "20260320_135050_adc229",
+  "timestamp": "2026-03-20T13:50:50.451915+00:00",
+  "original_path": "/home/michael/producer-repo/test_matrix/batch1/1A_sub1_gen1.mp3",
+  "variant_path": "/home/michael/producer-repo/test_matrix/batch4/4F_sub1_gen2.mp3",
+  "prompt_text": "[Verse]\nSTEEL AND GLASS REFLECTING COLD DECEMBER\nFOOTSTEPS ON THE BRIDGE I STILL REMEMBER",
+  "intent": "ALL CAPS lyrics",
+  "source": "suno",
+  "brackets": [
+    {
+      "start": 10.0,
+      "end": 50.0
+    },
+    {
+      "start": 50.0,
+      "end": 90.0
+    }
+  ],
+  "anchors": [],
+  "bracket_results": [
+    {
+      "window": "0:10-0:50",
+      "start": 10.0,
+      "end": 50.0,
+      "original_features": {
+        "rms_mean": 0.150365,
+        "rms_std": 0.054598,
+        "centroid_mean": 2506.22,
+        "centroid_std": 1036.87,
+        "onset_strength_mean": 1.5665,
+        "onset_density": 3.83,
+        "tempo": 117.5
+      },
+      "variant_features": {
+        "rms_mean": 0.042871,
+        "rms_std": 0.044103,
+        "centroid_mean": 2928.33,
+        "centroid_std": 1779.68,
+        "onset_strength_mean": 0.8648,
+        "onset_density": 2.14,
+        "tempo": 123.0
+      },
+      "deltas": {
+        "rms_mean": -0.7149,
+        "rms_std": -0.1922,
+        "centroid_mean": 0.1684,
+        "centroid_std": 0.7164,
+        "onset_strength_mean": -0.4479,
+        "onset_density": -0.4413,
+        "tempo": 0.0468
+      },
+      "compliance": {
+        "score": 0.5,
+        "confidence": 0.0,
+        "verdict": "MIXED",
+        "matched_rules": [],
+        "explanation": "No keyword rules matched the intent text. Score is neutral."
+      },
+      "notes": {
+        "window": "0:10-0:50",
+        "what_changed": "Region is quieter (71% change in RMS); Tighter dynamics / more consistent level; Spectral balance shifted brighter; Sparser rhythm (44% fewer onsets/sec); Tempo shifted: 118 \u2192 123 BPM",
+        "what_improved": "No clear improvements aligned with intent detected",
+        "what_got_worse": "Large loudness shift (quieter) \u2014 may be unintended",
+        "suggested_tweak": "Try being more specific with production terminology in the bracket prompt"
+      }
+    },
+    {
+      "window": "0:50-1:30",
+      "start": 50.0,
+      "end": 90.0,
+      "original_features": {
+        "rms_mean": 0.201296,
+        "rms_std": 0.038978,
+        "centroid_mean": 2951.39,
+        "centroid_std": 753.59,
+        "onset_strength_mean": 1.1222,
+        "onset_density": 3.83,
+        "tempo": 117.5
+      },
+      "variant_features": {
+        "rms_mean": 0.0,
+        "rms_std": 0.0,
+        "centroid_mean": 0.0,
+        "centroid_std": 0.0,
+        "onset_strength_mean": 0.0,
+        "onset_density": 0.0,
+        "tempo": 0.0
+      },
+      "deltas": {
+        "rms_mean": -1.0,
+        "rms_std": -1.0,
+        "centroid_mean": -1.0,
+        "centroid_std": -1.0,
+        "onset_strength_mean": -1.0,
+        "onset_density": -1.0,
+        "tempo": -1.0
+      },
+      "compliance": {
+        "score": 0.5,
+        "confidence": 0.0,
+        "verdict": "MIXED",
+        "matched_rules": [],
+        "explanation": "No keyword rules matched the intent text. Score is neutral."
+      },
+      "notes": {
+        "window": "0:50-1:30",
+        "what_changed": "Region is quieter (100% change in RMS); Tighter dynamics / more consistent level; Spectral balance shifted darker/warmer; Sparser rhythm (100% fewer onsets/sec); Tempo shifted: 118 \u2192 0 BPM",
+        "what_improved": "No clear improvements aligned with intent detected",
+        "what_got_worse": "Large loudness shift (quieter) \u2014 may be unintended; Large spectral shift (darker/warmer) \u2014 check for tonal artifacts; Significant tempo change \u2014 likely an estimation artifact or real drift",
+        "suggested_tweak": "Try being more specific with production terminology in the bracket prompt"
+      }
+    }
+  ],
+  "drift": {
+    "per_anchor": [],
+    "overall_drift": 0.0,
+    "verdict": "LOW"
+  },
+  "slice_files": [],
+  "bank_dir": "./snippet_bank"
+}

@@ -1,0 +1,29 @@
+{
+  "session_id": "20260320_045912_95f8ce",
+  "status": "active",
+  "created_at": "2026-03-20T04:59:12.138684+00:00",
+  "prompt": "trap beat, hard 808s",
+  "brackets": [
+    "0:10-0:20"
+  ],
+  "intent": "brighter hi-hats, crisp",
+  "max_iterations": 10,
+  "target_compliance": 0.7,
+  "target_drift": 0.15,
+  "iterations": [
+    {
+      "iteration": 1,
+      "timestamp": "2026-03-20T04:59:18.972381+00:00",
+      "variant_prompt": "trap beat, brighter hi-hats",
+      "run_id": "20260320_045807_cfc548",
+      "compliance_score": 0.6,
+      "compliance_verdict": "MIXED",
+      "drift_score": 0.1,
+      "drift_verdict": "LOW",
+      "notes": "Slightly brighter but not crisp enough",
+      "met_targets": false
+    }
+  ],
+  "accepted_run": null,
+  "accepted_at": null
+}

@@ -1,0 +1,22 @@
+CONDITION: 2C — Hook-centric [Verse/Hook/Verse/Hook/Fade Out]
+STYLE: indie rock, male vocals, 120 bpm
+MODEL: Suno v5 (chirp-crow)
+
+LYRICS:
+[Verse 1]
+Walking through the city lights again
+Every street a story I can't explain
+
+[Hook]
+The neon hums a melody I know
+A rhythm pulling me where I need to go
+
+[Verse 2]
+The morning finds me halfway home
+Static on the radio, dancing alone
+
+[Hook]
+Turn it up and let the whole thing break
+This is every chance I'm gonna take
+
+[Fade Out]

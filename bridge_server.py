@@ -124,6 +124,14 @@ class BridgeHandler(BaseHTTPRequestHandler):
             self._handle_capture(body)
             return
 
+        if path == '/generate/poll':
+            self._handle_generate_poll(body)
+            return
+
+        if path == '/generate/download':
+            self._handle_generate_download(body)
+            return
+
         self._send_json({'error': f'Unknown endpoint: {path}'}, 404)
 
     # ── Static / Audio ────────────────────────────────────────────
@@ -404,9 +412,94 @@ class BridgeHandler(BaseHTTPRequestHandler):
         self._send_json({'count': len(items), 'jobs': items})
 
 
-def run_server(port=7862):
-    server = HTTPServer(('127.0.0.1', port), BridgeHandler)
-    print(f'Producer Bridge running on http://localhost:{port}')
+    def _handle_generate_poll(self, body):
+        """Poll for Suno clips generated after a given timestamp.
+
+        Body: {
+            after_ts: float   — Unix timestamp captured before clicking Create
+            jwt?: str         — Bearer token (falls back to ./suno_jwt.txt)
+            dest_dir?: str    — Where to download MP3s (default: ./suno_audio)
+            timeout?: int     — Max wait seconds (default: 300)
+            poll_interval?: int
+        }
+
+        Returns: { clips: [{clip_id, local_path, title, duration, audio_url}] }
+        """
+        after_ts = body.get('after_ts')
+        if not after_ts:
+            self._send_json({'error': 'after_ts required'}, 400)
+            return
+
+        try:
+            from tools.suno import load_jwt, save_jwt, wait_and_download
+            jwt = body.get('jwt')
+            if not jwt:
+                jwt = load_jwt('./suno_jwt.txt')
+            if not jwt:
+                self._send_json({'error': 'No valid JWT — provide jwt in body or save to ./suno_jwt.txt'}, 401)
+                return
+            # Update JWT file if a fresh one was passed
+            if body.get('jwt'):
+                save_jwt(body['jwt'], './suno_jwt.txt')
+
+            dest_dir = body.get('dest_dir', './suno_audio')
+            timeout = int(body.get('timeout', 300))
+            poll_interval = int(body.get('poll_interval', 5))
+
+            results = wait_and_download(
+                after_ts=float(after_ts),
+                jwt=jwt,
+                dest_dir=dest_dir,
+                timeout=timeout,
+                poll_interval=poll_interval,
+            )
+
+            clips = []
+            for r in results:
+                c = r.get('clip', {})
+                clips.append({
+                    'clip_id': r['clip_id'],
+                    'local_path': r['local_path'],
+                    'title': c.get('title', ''),
+                    'duration': c.get('metadata', {}).get('duration'),
+                    'audio_url': c.get('audio_url', ''),
+                    'bpm': c.get('metadata', {}).get('avg_bpm'),
+                    'key': c.get('metadata', {}).get('key'),
+                    'tags': c.get('metadata', {}).get('tags', ''),
+                })
+
+            self._send_json({'clips': clips})
+        except TimeoutError as e:
+            self._send_json({'error': str(e)}, 504)
+        except Exception as e:
+            self._send_json({'error': str(e)}, 500)
+
+    def _handle_generate_download(self, body):
+        """Download a single Suno clip by audio URL.
+
+        Body: { audio_url: str, dest_dir?: str, filename?: str }
+        Returns: { local_path: str }
+        """
+        audio_url = body.get('audio_url')
+        if not audio_url:
+            self._send_json({'error': 'audio_url required'}, 400)
+            return
+
+        try:
+            from tools.suno import download_clip
+            dest = download_clip(
+                audio_url=audio_url,
+                dest_dir=body.get('dest_dir', './suno_audio'),
+                filename=body.get('filename'),
+            )
+            self._send_json({'local_path': dest})
+        except Exception as e:
+            self._send_json({'error': str(e)}, 500)
+
+
+def run_server(port=7862, host='127.0.0.1'):
+    server = HTTPServer((host, port), BridgeHandler)
+    print(f'Producer Bridge running on http://{host}:{port}')
     print(f'Press Ctrl+C to stop')
     try:
         server.serve_forever()
@@ -418,8 +511,9 @@ def run_server(port=7862):
 def main():
     p = argparse.ArgumentParser(description='Producer Bridge Server')
     p.add_argument('--port', type=int, default=7862, help='Port (default: 7862)')
+    p.add_argument('--host', default='0.0.0.0', help='Bind host (default: 0.0.0.0)')
     args = p.parse_args()
-    run_server(args.port)
+    run_server(args.port, args.host)
 
 
 if __name__ == '__main__':

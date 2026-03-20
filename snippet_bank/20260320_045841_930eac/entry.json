@@ -1,0 +1,79 @@
+{
+  "run_id": "20260320_045841_930eac",
+  "timestamp": "2026-03-20T04:58:41.123280+00:00",
+  "original_path": "/home/michael/producer-repo/test_original.wav",
+  "variant_path": "/home/michael/producer-repo/test_variant1.wav",
+  "prompt_text": "",
+  "intent": "darker pads",
+  "source": "manual",
+  "brackets": [
+    {
+      "start": 5.0,
+      "end": 20.0
+    }
+  ],
+  "anchors": [],
+  "bracket_results": [
+    {
+      "window": "0:05-0:20",
+      "start": 5.0,
+      "end": 20.0,
+      "original_features": {
+        "rms_mean": 0.247831,
+        "rms_std": 0.003721,
+        "centroid_mean": 3957.3,
+        "centroid_std": 66.88,
+        "onset_strength_mean": 0.7817,
+        "onset_density": 3.93,
+        "tempo": 123.0
+      },
+      "variant_features": {
+        "rms_mean": 0.41569,
+        "rms_std": 0.118411,
+        "centroid_mean": 3889.77,
+        "centroid_std": 169.24,
+        "onset_strength_mean": 0.851,
+        "onset_density": 4.73,
+        "tempo": 117.5
+      },
+      "deltas": {
+        "rms_mean": 0.6773,
+        "rms_std": 30.8223,
+        "centroid_mean": -0.0171,
+        "centroid_std": 1.5305,
+        "onset_strength_mean": 0.0887,
+        "onset_density": 0.2036,
+        "tempo": -0.0447
+      },
+      "compliance": {
+        "score": 0.0,
+        "confidence": 0.333,
+        "verdict": "FAIL",
+        "matched_rules": [
+          {
+            "keyword": "darker",
+            "feature": "centroid_mean",
+            "expected": "decrease",
+            "actual_delta": -0.0171,
+            "met": false
+          }
+        ],
+        "explanation": "Missed 1 expectation(s): darker\u2192centroid_mean"
+      },
+      "notes": {
+        "window": "0:05-0:20",
+        "what_changed": "Region is louder (68% change in RMS); More dynamic range / less consistent level; Busier rhythm (20% more onsets/sec); Tempo shifted: 123 \u2192 118 BPM",
+        "what_improved": "No clear improvements aligned with intent detected",
+        "what_got_worse": "Large loudness shift (louder) \u2014 may be unintended",
+        "suggested_tweak": "For 'darker', try adding: 'warm', 'mellow', 'low-mid focus'"
+      }
+    }
+  ],
+  "drift": {
+    "per_anchor": [],
+    "overall_drift": 0.0,
+    "verdict": "LOW"
+  },
+  "slice_files": [],
+  "bank_dir": "./snippet_bank"
+}

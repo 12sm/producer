@@ -46,7 +46,7 @@ export default function Bank() {
       <p className="text-sm text-text-muted mb-4">{runs.length} runs</p>
 
       {/* Filters */}
-      <div className="flex gap-3 mb-4">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mb-4">
         <input
           type="text"
           placeholder="Search by intent..."
@@ -55,34 +55,36 @@ export default function Bank() {
           onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
           className="flex-1 px-3 py-2 bg-surface border border-border rounded text-sm text-text placeholder-text-muted focus:outline-none focus:border-accent"
         />
-        <select
-          value={compFilter}
-          onChange={(e) =>
-            setCompFilter(e.target.value as ComplianceVerdict | '')
-          }
-          className="px-3 py-2 bg-surface border border-border rounded text-sm text-text focus:outline-none"
-        >
-          <option value="">All compliance</option>
-          <option value="PASS">PASS</option>
-          <option value="MIXED">MIXED</option>
-          <option value="FAIL">FAIL</option>
-        </select>
-        <select
-          value={driftFilter}
-          onChange={(e) =>
-            setDriftFilter(e.target.value as DriftVerdict | '')
-          }
-          className="px-3 py-2 bg-surface border border-border rounded text-sm text-text focus:outline-none"
-        >
-          <option value="">All drift</option>
-          <option value="LOW">LOW</option>
-          <option value="MED">MED</option>
-          <option value="HIGH">HIGH</option>
-        </select>
+        <div className="flex gap-2">
+          <select
+            value={compFilter}
+            onChange={(e) =>
+              setCompFilter(e.target.value as ComplianceVerdict | '')
+            }
+            className="flex-1 sm:flex-none px-3 py-2 bg-surface border border-border rounded text-sm text-text focus:outline-none"
+          >
+            <option value="">All compliance</option>
+            <option value="PASS">PASS</option>
+            <option value="MIXED">MIXED</option>
+            <option value="FAIL">FAIL</option>
+          </select>
+          <select
+            value={driftFilter}
+            onChange={(e) =>
+              setDriftFilter(e.target.value as DriftVerdict | '')
+            }
+            className="flex-1 sm:flex-none px-3 py-2 bg-surface border border-border rounded text-sm text-text focus:outline-none"
+          >
+            <option value="">All drift</option>
+            <option value="LOW">LOW</option>
+            <option value="MED">MED</option>
+            <option value="HIGH">HIGH</option>
+          </select>
+        </div>
       </div>
 
       {/* Runs table */}
-      <div className="bg-surface border border-border rounded-lg overflow-hidden">
+      <div className="bg-surface border border-border rounded-lg overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-border text-text-muted text-xs uppercase">

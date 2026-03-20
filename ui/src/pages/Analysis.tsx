@@ -8,28 +8,50 @@ import WaveSurfer from 'wavesurfer.js'
 
 type Region = { start: number; end: number }
 
+function formatTime(s: number) {
+  const m = Math.floor(s / 60)
+  const sec = Math.floor(s % 60).toString().padStart(2, '0')
+  return `${m}:${sec}`
+}
+
 interface WaveformProps {
   url: string
   label: string
   brackets: Region[]
   anchors: Region[]
   onReady: (ws: WaveSurfer) => void
+  onPlay?: () => void
+  onBracketClick?: (index: number, start: number) => void
 }
 
-function WaveformPlayer({ url, label, brackets, anchors, onReady }: WaveformProps) {
+function WaveformPlayer({
+  url,
+  label,
+  brackets,
+  anchors,
+  onReady,
+  onPlay,
+  onBracketClick,
+}: WaveformProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const wsRef = useRef<WaveSurfer | null>(null)
   const [playing, setPlaying] = useState(false)
   const [ready, setReady] = useState(false)
+  const onPlayRef = useRef(onPlay)
+  const onBracketClickRef = useRef(onBracketClick)
+
+  useEffect(() => { onPlayRef.current = onPlay }, [onPlay])
+  useEffect(() => { onBracketClickRef.current = onBracketClick }, [onBracketClick])
 
   useEffect(() => {
     if (!containerRef.current) return
 
     const ws = WaveSurfer.create({
       container: containerRef.current,
-      waveColor: '#4a4a60',
+      waveColor: '#3d3d55',
       progressColor: '#a855f7',
-      cursorColor: '#a855f7',
+      cursorColor: '#e0e0ff',
+      cursorWidth: 2,
       barWidth: 2,
       barGap: 1,
       barRadius: 2,
@@ -41,7 +63,10 @@ function WaveformPlayer({ url, label, brackets, anchors, onReady }: WaveformProp
       setReady(true)
       onReady(ws)
     })
-    ws.on('play', () => setPlaying(true))
+    ws.on('play', () => {
+      setPlaying(true)
+      onPlayRef.current?.()
+    })
     ws.on('pause', () => setPlaying(false))
     ws.on('finish', () => setPlaying(false))
 
@@ -51,6 +76,8 @@ function WaveformPlayer({ url, label, brackets, anchors, onReady }: WaveformProp
     return () => {
       ws.destroy()
       wsRef.current = null
+      setReady(false)
+      setPlaying(false)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url])
@@ -70,29 +97,45 @@ function WaveformPlayer({ url, label, brackets, anchors, onReady }: WaveformProp
       end: number,
       bg: string,
       border: string,
-      labelText: string,
+      _labelText: string,
       labelColor: string,
+      bracketIndex: number | null,
     ) => {
       const pLeft = (start / duration) * 100
       const pWidth = ((end - start) / duration) * 100
       const el = document.createElement('div')
       el.className = 'region-overlay'
+      const clickable = bracketIndex !== null
       el.style.cssText = `
         position:absolute; top:0; bottom:0;
         left:${pLeft}%; width:${pWidth}%;
         background:${bg};
-        pointer-events:none; z-index:2;
+        z-index:2;
         border-left:2px solid ${border};
         border-right:2px solid ${border};
+        ${clickable ? 'cursor:pointer;' : 'pointer-events:none;'}
+        transition: background 0.1s;
       `
+      if (clickable) {
+        el.addEventListener('mouseenter', () => {
+          el.style.background = bg.replace('0.18', '0.32').replace('0.12', '0.22')
+        })
+        el.addEventListener('mouseleave', () => {
+          el.style.background = bg
+        })
+        el.addEventListener('click', (e) => {
+          e.stopPropagation()
+          onBracketClickRef.current?.(bracketIndex, start)
+        })
+      }
+
       const tag = document.createElement('span')
-      const mins = Math.floor(start / 60)
-      const secs = Math.floor(start % 60).toString().padStart(2, '0')
-      tag.textContent = `${labelText} ${mins}:${secs}`
+      tag.textContent = `B${bracketIndex ?? ''} ${formatTime(start)}–${formatTime(end)}`
       tag.style.cssText = `
-        position:absolute; top:2px; left:4px;
+        position:absolute; top:3px; left:5px;
         font-size:9px; font-family:monospace;
         color:${labelColor}; white-space:nowrap;
+        pointer-events:none;
       `
       el.appendChild(tag)
       container.style.position = 'relative'
@@ -100,17 +143,29 @@ function WaveformPlayer({ url, label, brackets, anchors, onReady }: WaveformProp
     }
 
     brackets.forEach((b, i) =>
-      addOverlay(b.start, b.end, 'rgba(168,85,247,0.18)', 'rgba(168,85,247,0.7)', `B${i}`, 'rgba(168,85,247,0.9)')
+      addOverlay(
+        b.start, b.end,
+        'rgba(168,85,247,0.18)', 'rgba(168,85,247,0.6)',
+        `B${i}`, 'rgba(200,160,255,0.95)',
+        i,
+      )
     )
     anchors.forEach((a, i) =>
-      addOverlay(a.start, a.end, 'rgba(34,197,94,0.12)', 'rgba(34,197,94,0.5)', `A${i}`, 'rgba(34,197,94,0.8)')
+      addOverlay(
+        a.start, a.end,
+        'rgba(34,197,94,0.12)', 'rgba(34,197,94,0.45)',
+        `A${i}`, 'rgba(100,220,130,0.9)',
+        null,
+      )
     )
   }, [ready, brackets, anchors])
 
   return (
     <div className="bg-surface border border-border rounded-lg p-3">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-xs text-text-muted uppercase tracking-wider">{label}</span>
+        <span className="text-xs text-text-muted uppercase tracking-wider font-mono">
+          {label}
+        </span>
         <button
           onClick={() => wsRef.current?.playPause()}
           className="text-xs px-3 py-1 bg-accent/20 text-accent border border-accent/30 rounded hover:bg-accent/30 disabled:opacity-40 transition-colors"
@@ -129,6 +184,7 @@ export default function Analysis() {
   const [run, setRun] = useState<AnalysisRun | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [zoom, setZoom] = useState(0)
+  const [activeSide, setActiveSide] = useState<'A' | 'B' | null>(null)
 
   const origWs = useRef<WaveSurfer | null>(null)
   const varWs = useRef<WaveSurfer | null>(null)
@@ -147,25 +203,26 @@ export default function Analysis() {
     varWs.current?.zoom(zoom)
   }, [zoom])
 
-  // Wire up scroll sync once both waveforms are ready
+  // Wire scroll sync using getWrapper() — called once both are ready
   const wireScrollSync = useCallback(() => {
     const a = origWs.current
     const b = varWs.current
     if (!a || !b) return
 
-    a.on('scroll', (visibleStartTime, _visibleEndTime, scrollLeft) => {
+    const wrapA = a.getWrapper()
+    const wrapB = b.getWrapper()
+    if (!wrapA || !wrapB) return
+
+    wrapA.addEventListener('scroll', () => {
       if (syncingScroll.current) return
       syncingScroll.current = true
-      const wrapper = (b as unknown as { wrapper: HTMLElement }).wrapper
-      if (wrapper) wrapper.scrollLeft = scrollLeft
+      wrapB.scrollLeft = wrapA.scrollLeft
       syncingScroll.current = false
     })
-
-    b.on('scroll', (visibleStartTime, _visibleEndTime, scrollLeft) => {
+    wrapB.addEventListener('scroll', () => {
       if (syncingScroll.current) return
       syncingScroll.current = true
-      const wrapper = (a as unknown as { wrapper: HTMLElement }).wrapper
-      if (wrapper) wrapper.scrollLeft = scrollLeft
+      wrapA.scrollLeft = wrapB.scrollLeft
       syncingScroll.current = false
     })
   }, [])
@@ -180,8 +237,46 @@ export default function Analysis() {
     if (origWs.current) wireScrollSync()
   }, [wireScrollSync])
 
+  // A/B mutual-exclusion: when one plays, pause the other
+  const handleOrigPlay = useCallback(() => {
+    varWs.current?.pause()
+    setActiveSide('A')
+  }, [])
+
+  const handleVarPlay = useCallback(() => {
+    origWs.current?.pause()
+    setActiveSide('B')
+  }, [])
+
+  // Seek both to a bracket start; optionally play one side
+  const seekBoth = useCallback((start: number) => {
+    origWs.current?.setTime(start)
+    varWs.current?.setTime(start)
+  }, [])
+
+  const playFrom = useCallback((side: 'A' | 'B', start: number) => {
+    seekBoth(start)
+    if (side === 'A') {
+      varWs.current?.pause()
+      origWs.current?.play()
+    } else {
+      origWs.current?.pause()
+      varWs.current?.play()
+    }
+  }, [seekBoth])
+
+  // Clicking a bracket overlay seeks both; then plays whichever side is active
+  const handleBracketClick = useCallback((_i: number, start: number) => {
+    seekBoth(start)
+    // If something is already playing, keep playing on that side
+    if (activeSide === 'A') origWs.current?.play()
+    else if (activeSide === 'B') varWs.current?.play()
+  }, [seekBoth, activeSide])
+
   if (error) return <div className="text-fail">Error: {error}</div>
   if (!run) return <div className="text-text-muted">Loading...</div>
+
+  const brackets = run.brackets
 
   return (
     <div>
@@ -190,8 +285,8 @@ export default function Analysis() {
       </Link>
 
       {/* Header */}
-      <div className="mt-4 mb-6">
-        <div className="flex items-center gap-3 mb-2">
+      <div className="mt-4 mb-5">
+        <div className="flex flex-wrap items-center gap-3 mb-2">
           <h2 className="text-xl font-bold font-mono">{run.run_id}</h2>
           {run.source && (
             <span className="text-xs bg-surface-2 border border-border px-2 py-0.5 rounded">
@@ -199,7 +294,7 @@ export default function Analysis() {
             </span>
           )}
         </div>
-        <div className="flex items-center gap-3 text-sm mb-4">
+        <div className="flex flex-wrap items-center gap-3 text-sm">
           <span className="text-accent">{run.intent}</span>
           {run.bracket_results[0] && (
             <>
@@ -211,26 +306,94 @@ export default function Analysis() {
       </div>
 
       {/* Waveforms */}
-      <div className="space-y-3 mb-4">
+      <div className="space-y-3 mb-3">
         <WaveformPlayer
           url={audioUrl(run.original_path)}
-          label="Original"
+          label="A — Original"
           brackets={run.brackets}
           anchors={run.anchors}
           onReady={handleOrigReady}
+          onPlay={handleOrigPlay}
+          onBracketClick={handleBracketClick}
         />
         <WaveformPlayer
           url={audioUrl(run.variant_path)}
-          label="Variant"
+          label="B — Variant"
           brackets={run.brackets}
           anchors={run.anchors}
           onReady={handleVarReady}
+          onPlay={handleVarPlay}
+          onBracketClick={handleBracketClick}
         />
       </div>
 
-      {/* Zoom control */}
-      <div className="flex items-center gap-3 mb-6 px-1">
-        <span className="text-xs text-text-muted w-10">Zoom</span>
+      {/* A/B + bracket controls */}
+      <div className="bg-surface border border-border rounded-lg px-3 py-2.5 mb-3 flex flex-wrap items-center gap-2">
+        {/* Active indicator */}
+        <span className="text-xs text-text-muted mr-1">A/B:</span>
+        <button
+          onClick={() => {
+            origWs.current?.play()
+          }}
+          className={`text-xs px-3 py-1 rounded border transition-colors ${
+            activeSide === 'A'
+              ? 'bg-accent text-white border-accent'
+              : 'bg-surface-2 text-text-muted border-border hover:text-text'
+          }`}
+        >
+          ▶ A
+        </button>
+        <button
+          onClick={() => {
+            varWs.current?.play()
+          }}
+          className={`text-xs px-3 py-1 rounded border transition-colors ${
+            activeSide === 'B'
+              ? 'bg-accent text-white border-accent'
+              : 'bg-surface-2 text-text-muted border-border hover:text-text'
+          }`}
+        >
+          ▶ B
+        </button>
+
+        <span className="text-border mx-1">|</span>
+
+        {/* Bracket jump buttons */}
+        <span className="text-xs text-text-muted">Jump:</span>
+        {brackets.map((b, i) => (
+          <button
+            key={i}
+            onClick={() => seekBoth(b.start)}
+            className="text-xs px-2 py-1 rounded border border-accent/40 text-accent hover:bg-accent/10 transition-colors font-mono"
+          >
+            B{i} {formatTime(b.start)}
+          </button>
+        ))}
+        {brackets.map((b, i) => (
+          <button
+            key={`ab-${i}`}
+            onClick={() => playFrom('A', b.start)}
+            className="text-xs px-2 py-0.5 rounded bg-accent/10 text-accent hover:bg-accent/20 transition-colors font-mono"
+            title={`Play A from ${formatTime(b.start)}`}
+          >
+            A@B{i}
+          </button>
+        ))}
+        {brackets.map((b, i) => (
+          <button
+            key={`bb-${i}`}
+            onClick={() => playFrom('B', b.start)}
+            className="text-xs px-2 py-0.5 rounded bg-surface-2 text-text-muted hover:text-text hover:bg-surface-2 transition-colors border border-border font-mono"
+            title={`Play B from ${formatTime(b.start)}`}
+          >
+            B@B{i}
+          </button>
+        ))}
+
+        <span className="text-border mx-1">|</span>
+
+        {/* Zoom */}
+        <span className="text-xs text-text-muted">Zoom</span>
         <input
           type="range"
           min={0}
@@ -238,7 +401,7 @@ export default function Analysis() {
           step={10}
           value={zoom}
           onChange={(e) => setZoom(Number(e.target.value))}
-          className="flex-1 accent-[#a855f7]"
+          className="w-24 accent-[#a855f7]"
         />
         <button
           onClick={() => setZoom(0)}
@@ -248,15 +411,41 @@ export default function Analysis() {
         </button>
       </div>
 
+      {/* Legend */}
+      <div className="flex gap-4 text-xs text-text-muted mb-5 px-1">
+        <span className="flex items-center gap-1.5">
+          <span className="inline-block w-3 h-3 rounded-sm bg-accent/30 border border-accent/60" />
+          Bracket region (click to seek)
+        </span>
+        <span className="flex items-center gap-1.5">
+          <span className="inline-block w-3 h-3 rounded-sm bg-pass/20 border border-pass/40" />
+          Anchor region
+        </span>
+      </div>
+
       {/* Bracket results */}
       {run.bracket_results.map((br, i) => (
         <div key={i} className="bg-surface border border-border rounded-lg p-4 mb-4">
-          <div className="flex items-center gap-3 mb-3">
-            <h3 className="text-sm font-bold">Bracket [{br.window}]</h3>
+          <div className="flex flex-wrap items-center gap-3 mb-3">
+            <h3 className="text-sm font-bold font-mono">
+              [{br.window}]
+            </h3>
             <ComplianceBadge verdict={br.compliance.verdict} />
             <span className="text-xs text-text-muted">
               score: {br.compliance.score.toFixed(2)} | confidence: {br.compliance.confidence.toFixed(2)}
             </span>
+            <button
+              onClick={() => playFrom('A', br.start)}
+              className="ml-auto text-xs px-2 py-0.5 rounded bg-accent/10 text-accent hover:bg-accent/20 border border-accent/20 font-mono"
+            >
+              ▶ A
+            </button>
+            <button
+              onClick={() => playFrom('B', br.start)}
+              className="text-xs px-2 py-0.5 rounded border border-border text-text-muted hover:text-text font-mono"
+            >
+              ▶ B
+            </button>
           </div>
 
           <FeatureBar deltas={br.deltas} />
@@ -268,10 +457,10 @@ export default function Analysis() {
                 {br.compliance.matched_rules.map((rule, j) => (
                   <div key={j} className="text-xs flex items-center gap-2">
                     <span className={rule.met ? 'text-pass' : 'text-fail'}>
-                      {rule.met ? '\u2713' : '\u2717'}
+                      {rule.met ? '✓' : '✗'}
                     </span>
                     <span className="text-text-muted">
-                      "{rule.keyword}" &rarr; {rule.feature} {rule.expected}
+                      "{rule.keyword}" → {rule.feature} {rule.expected}
                     </span>
                     <span className="font-mono">
                       (delta: {rule.actual_delta >= 0 ? '+' : ''}{rule.actual_delta.toFixed(3)})
@@ -302,7 +491,7 @@ export default function Analysis() {
       ))}
 
       {/* Drift */}
-      <div className="bg-surface border border-border rounded-lg p-4">
+      <div className="bg-surface border border-border rounded-lg p-4 mb-6">
         <div className="flex items-center gap-3 mb-2">
           <h3 className="text-sm font-bold">Drift</h3>
           <DriftBadge verdict={run.drift.verdict} />

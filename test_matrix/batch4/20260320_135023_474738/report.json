@@ -1,0 +1,121 @@
+{
+  "run_id": "20260320_135023_474738",
+  "timestamp": "2026-03-20T13:50:23.980933+00:00",
+  "original_path": "/home/michael/producer-repo/test_matrix/batch1/1A_sub1_gen1.mp3",
+  "variant_path": "/home/michael/producer-repo/test_matrix/batch4/4E_sub1_gen1.mp3",
+  "prompt_text": "[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna ta",
+  "intent": "[Chorus] repeated 4x",
+  "source": "suno",
+  "brackets": [
+    {
+      "start": 10.0,
+      "end": 50.0
+    },
+    {
+      "start": 50.0,
+      "end": 90.0
+    }
+  ],
+  "anchors": [],
+  "bracket_results": [
+    {
+      "window": "0:10-0:50",
+      "start": 10.0,
+      "end": 50.0,
+      "original_features": {
+        "rms_mean": 0.150365,
+        "rms_std": 0.054598,
+        "centroid_mean": 2506.22,
+        "centroid_std": 1036.87,
+        "onset_strength_mean": 1.5665,
+        "onset_density": 3.83,
+        "tempo": 117.5
+      },
+      "variant_features": {
+        "rms_mean": 0.129448,
+        "rms_std": 0.042459,
+        "centroid_mean": 2373.7,
+        "centroid_std": 927.83,
+        "onset_strength_mean": 1.3176,
+        "onset_density": 3.2,
+        "tempo": 117.5
+      },
+      "deltas": {
+        "rms_mean": -0.1391,
+        "rms_std": -0.2223,
+        "centroid_mean": -0.0529,
+        "centroid_std": -0.1052,
+        "onset_strength_mean": -0.1589,
+        "onset_density": -0.1645,
+        "tempo": 0.0
+      },
+      "compliance": {
+        "score": 0.5,
+        "confidence": 0.0,
+        "verdict": "MIXED",
+        "matched_rules": [],
+        "explanation": "No keyword rules matched the intent text. Score is neutral."
+      },
+      "notes": {
+        "window": "0:10-0:50",
+        "what_changed": "Region is quieter (14% change in RMS); Tighter dynamics / more consistent level; Spectral balance shifted darker/warmer; Sparser rhythm (16% fewer onsets/sec)",
+        "what_improved": "No clear improvements aligned with intent detected",
+        "what_got_worse": "No obvious artifacts or regressions detected",
+        "suggested_tweak": "Try being more specific with production terminology in the bracket prompt"
+      }
+    },
+    {
+      "window": "0:50-1:30",
+      "start": 50.0,
+      "end": 90.0,
+      "original_features": {
+        "rms_mean": 0.201296,
+        "rms_std": 0.038978,
+        "centroid_mean": 2951.39,
+        "centroid_std": 753.59,
+        "onset_strength_mean": 1.1222,
+        "onset_density": 3.83,
+        "tempo": 117.5
+      },
+      "variant_features": {
+        "rms_mean": 0.155164,
+        "rms_std": 0.036137,
+        "centroid_mean": 2591.33,
+        "centroid_std": 660.76,
+        "onset_strength_mean": 1.0641,
+        "onset_density": 3.27,
+        "tempo": 117.5
+      },
+      "deltas": {
+        "rms_mean": -0.2292,
+        "rms_std": -0.0729,
+        "centroid_mean": -0.122,
+        "centroid_std": -0.1232,
+        "onset_strength_mean": -0.0518,
+        "onset_density": -0.1462,
+        "tempo": 0.0
+      },
+      "compliance": {
+        "score": 0.5,
+        "confidence": 0.0,
+        "verdict": "MIXED",
+        "matched_rules": [],
+        "explanation": "No keyword rules matched the intent text. Score is neutral."
+      },
+      "notes": {
+        "window": "0:50-1:30",
+        "what_changed": "Region is quieter (23% change in RMS); Spectral balance shifted darker/warmer; Sparser rhythm (15% fewer onsets/sec)",
+        "what_improved": "No clear improvements aligned with intent detected",
+        "what_got_worse": "No obvious artifacts or regressions detected",
+        "suggested_tweak": "Try being more specific with production terminology in the bracket prompt"
+      }
+    }
+  ],
+  "drift": {
+    "per_anchor": [],
+    "overall_drift": 0.0,
+    "verdict": "LOW"
+  },
+  "slice_files": [],
+  "bank_dir": "./snippet_bank"
+}

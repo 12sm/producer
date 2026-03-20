@@ -1,0 +1,42 @@
+{
+  "session_id": "20260320_045854_954ac4",
+  "status": "accepted",
+  "created_at": "2026-03-20T04:58:54.726022+00:00",
+  "prompt": "test lo-fi beat, mellow piano",
+  "brackets": [
+    "0:05-0:15"
+  ],
+  "intent": "louder drums, punchy kick",
+  "max_iterations": 10,
+  "target_compliance": 0.7,
+  "target_drift": 0.15,
+  "iterations": [
+    {
+      "iteration": 1,
+      "timestamp": "2026-03-20T04:58:59.769094+00:00",
+      "variant_prompt": "lo-fi beat, louder drums",
+      "run_id": "20260320_045743_117077",
+      "compliance_score": 0.85,
+      "compliance_verdict": "PASS",
+      "drift_score": 0.05,
+      "drift_verdict": "LOW",
+      "notes": "Good punch, drums are louder",
+      "met_targets": true
+    },
+    {
+      "iteration": 2,
+      "timestamp": "2026-03-20T04:59:04.372715+00:00",
+      "variant_prompt": "lo-fi beat, much louder drums, heavier kick",
+      "run_id": "20260320_045756_319d8c",
+      "compliance_score": 1.0,
+      "compliance_verdict": "PASS",
+      "drift_score": 0.0,
+      "drift_verdict": "LOW",
+      "notes": "Real punch, this is the one",
+      "met_targets": true
+    }
+  ],
+  "accepted_run": "20260320_045756_319d8c",
+  "accepted_at": "2026-03-20T04:59:08.172664+00:00",
+  "accept_notes": ""
+}

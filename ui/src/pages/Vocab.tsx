@@ -81,16 +81,16 @@ export default function Vocab() {
         className="w-full mb-4 px-3 py-2 bg-surface border border-border rounded text-sm text-text placeholder-text-muted focus:outline-none focus:border-accent"
       />
 
-      <div className="grid grid-cols-[1fr_300px] gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-4">
         {/* Keyword table */}
-        <div className="bg-surface border border-border rounded-lg overflow-hidden">
+        <div className="bg-surface border border-border rounded-lg overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border text-text-muted text-xs uppercase">
                 <th className="text-left p-3">Keyword</th>
                 <th className="text-right p-3 w-16">Obs</th>
                 <th className="text-right p-3 w-16">Pass%</th>
-                <th className="p-3 w-48">Top Effect</th>
+                <th className="hidden sm:table-cell p-3 w-48">Top Effect</th>
               </tr>
             </thead>
             <tbody>
@@ -128,7 +128,7 @@ export default function Vocab() {
                         {(entry.pass_rate * 100).toFixed(0)}%
                       </span>
                     </td>
-                    <td className="p-3 text-xs text-text-muted">
+                    <td className="hidden sm:table-cell p-3 text-xs text-text-muted">
                       {topEffect && (
                         <>
                           {FEATURE_LABELS[topEffect[0]]}{' '}

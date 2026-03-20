@@ -1,0 +1,121 @@
+{
+  "run_id": "20260320_134504_af05e0",
+  "timestamp": "2026-03-20T13:45:04.188080+00:00",
+  "original_path": "/home/michael/producer-repo/test_matrix/batch1/1A_sub1_gen1.mp3",
+  "variant_path": "/home/michael/producer-repo/test_matrix/batch2/2A_sub1_gen1.mp3",
+  "prompt_text": "[Intro]\n[Verse 1]\nWalking through the city lights again\nEvery street a story I can't explain\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\n[Pre-Chorus]\nThe neon hums a melody I know\n\n[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Bridge]\nThe morning finds me halfway home\nStatic on the radio, dancing alone\n\n[Chorus]\nBut the beat keeps going, the bass st",
+  "intent": "Full standard structure [Intro/Verse1/Pre-Chorus/Chorus/Bridge/Chorus/Outro]",
+  "source": "suno",
+  "brackets": [
+    {
+      "start": 10.0,
+      "end": 50.0
+    },
+    {
+      "start": 50.0,
+      "end": 90.0
+    }
+  ],
+  "anchors": [],
+  "bracket_results": [
+    {
+      "window": "0:10-0:50",
+      "start": 10.0,
+      "end": 50.0,
+      "original_features": {
+        "rms_mean": 0.150365,
+        "rms_std": 0.054598,
+        "centroid_mean": 2506.22,
+        "centroid_std": 1036.87,
+        "onset_strength_mean": 1.5665,
+        "onset_density": 3.83,
+        "tempo": 117.5
+      },
+      "variant_features": {
+        "rms_mean": 0.121594,
+        "rms_std": 0.05396,
+        "centroid_mean": 2809.27,
+        "centroid_std": 1122.43,
+        "onset_strength_mean": 1.3773,
+        "onset_density": 3.65,
+        "tempo": 117.5
+      },
+      "deltas": {
+        "rms_mean": -0.1913,
+        "rms_std": -0.0117,
+        "centroid_mean": 0.1209,
+        "centroid_std": 0.0825,
+        "onset_strength_mean": -0.1208,
+        "onset_density": -0.047,
+        "tempo": 0.0
+      },
+      "compliance": {
+        "score": 0.5,
+        "confidence": 0.0,
+        "verdict": "MIXED",
+        "matched_rules": [],
+        "explanation": "No keyword rules matched the intent text. Score is neutral."
+      },
+      "notes": {
+        "window": "0:10-0:50",
+        "what_changed": "Region is quieter (19% change in RMS); Spectral balance shifted brighter",
+        "what_improved": "No clear improvements aligned with intent detected",
+        "what_got_worse": "No obvious artifacts or regressions detected",
+        "suggested_tweak": "Try being more specific with production terminology in the bracket prompt"
+      }
+    },
+    {
+      "window": "0:50-1:30",
+      "start": 50.0,
+      "end": 90.0,
+      "original_features": {
+        "rms_mean": 0.201296,
+        "rms_std": 0.038978,
+        "centroid_mean": 2951.39,
+        "centroid_std": 753.59,
+        "onset_strength_mean": 1.1222,
+        "onset_density": 3.83,
+        "tempo": 117.5
+      },
+      "variant_features": {
+        "rms_mean": 0.15509,
+        "rms_std": 0.042515,
+        "centroid_mean": 2810.57,
+        "centroid_std": 1060.66,
+        "onset_strength_mean": 1.288,
+        "onset_density": 3.12,
+        "tempo": 117.5
+      },
+      "deltas": {
+        "rms_mean": -0.2295,
+        "rms_std": 0.0907,
+        "centroid_mean": -0.0477,
+        "centroid_std": 0.4075,
+        "onset_strength_mean": 0.1477,
+        "onset_density": -0.1854,
+        "tempo": 0.0
+      },
+      "compliance": {
+        "score": 0.5,
+        "confidence": 0.0,
+        "verdict": "MIXED",
+        "matched_rules": [],
+        "explanation": "No keyword rules matched the intent text. Score is neutral."
+      },
+      "notes": {
+        "window": "0:50-1:30",
+        "what_changed": "Region is quieter (23% change in RMS); Sparser rhythm (19% fewer onsets/sec)",
+        "what_improved": "No clear improvements aligned with intent detected",
+        "what_got_worse": "No obvious artifacts or regressions detected",
+        "suggested_tweak": "Try being more specific with production terminology in the bracket prompt"
+      }
+    }
+  ],
+  "drift": {
+    "per_anchor": [],
+    "overall_drift": 0.0,
+    "verdict": "LOW"
+  },
+  "slice_files": [],
+  "bank_dir": "./snippet_bank"
+}

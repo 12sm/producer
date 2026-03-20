@@ -1,0 +1,121 @@
+{
+  "run_id": "20260320_134427_d91a57",
+  "timestamp": "2026-03-20T13:44:27.356215+00:00",
+  "original_path": "/home/michael/producer-repo/test_matrix/batch1/1A_sub1_gen1.mp3",
+  "variant_path": "/home/michael/producer-repo/test_matrix/batch1/1C_sub1_gen1.mp3",
+  "prompt_text": "[Chorus]\nWalking through the city lights again\nEvery street a story I can't explain\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\n[Verse 1]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Outro]\nThe morning finds me halfway home\nStatic on the radio, dancing alone\nBut the beat keeps going, the bass stays low\nAnd I'm still chasing what I'll never know\n\n[Verse 2]\nO",
+  "intent": "Wrong order brackets (Chorus/Verse1/Outro/Verse2)",
+  "source": "suno",
+  "brackets": [
+    {
+      "start": 10.0,
+      "end": 50.0
+    },
+    {
+      "start": 50.0,
+      "end": 90.0
+    }
+  ],
+  "anchors": [],
+  "bracket_results": [
+    {
+      "window": "0:10-0:50",
+      "start": 10.0,
+      "end": 50.0,
+      "original_features": {
+        "rms_mean": 0.150365,
+        "rms_std": 0.054598,
+        "centroid_mean": 2506.22,
+        "centroid_std": 1036.87,
+        "onset_strength_mean": 1.5665,
+        "onset_density": 3.83,
+        "tempo": 117.5
+      },
+      "variant_features": {
+        "rms_mean": 0.164974,
+        "rms_std": 0.046543,
+        "centroid_mean": 2744.85,
+        "centroid_std": 958.72,
+        "onset_strength_mean": 1.3655,
+        "onset_density": 3.48,
+        "tempo": 117.5
+      },
+      "deltas": {
+        "rms_mean": 0.0972,
+        "rms_std": -0.1475,
+        "centroid_mean": 0.0952,
+        "centroid_std": -0.0754,
+        "onset_strength_mean": -0.1283,
+        "onset_density": -0.0914,
+        "tempo": 0.0
+      },
+      "compliance": {
+        "score": 0.5,
+        "confidence": 0.0,
+        "verdict": "MIXED",
+        "matched_rules": [],
+        "explanation": "No keyword rules matched the intent text. Score is neutral."
+      },
+      "notes": {
+        "window": "0:10-0:50",
+        "what_changed": "Region is louder (10% change in RMS); Tighter dynamics / more consistent level; Spectral balance shifted brighter; Sparser rhythm (9% fewer onsets/sec)",
+        "what_improved": "No clear improvements aligned with intent detected",
+        "what_got_worse": "No obvious artifacts or regressions detected",
+        "suggested_tweak": "Try being more specific with production terminology in the bracket prompt"
+      }
+    },
+    {
+      "window": "0:50-1:30",
+      "start": 50.0,
+      "end": 90.0,
+      "original_features": {
+        "rms_mean": 0.201296,
+        "rms_std": 0.038978,
+        "centroid_mean": 2951.39,
+        "centroid_std": 753.59,
+        "onset_strength_mean": 1.1222,
+        "onset_density": 3.83,
+        "tempo": 117.5
+      },
+      "variant_features": {
+        "rms_mean": 0.160304,
+        "rms_std": 0.064939,
+        "centroid_mean": 2688.14,
+        "centroid_std": 1076.25,
+        "onset_strength_mean": 1.0767,
+        "onset_density": 1.73,
+        "tempo": 117.5
+      },
+      "deltas": {
+        "rms_mean": -0.2036,
+        "rms_std": 0.666,
+        "centroid_mean": -0.0892,
+        "centroid_std": 0.4282,
+        "onset_strength_mean": -0.0405,
+        "onset_density": -0.5483,
+        "tempo": 0.0
+      },
+      "compliance": {
+        "score": 0.5,
+        "confidence": 0.0,
+        "verdict": "MIXED",
+        "matched_rules": [],
+        "explanation": "No keyword rules matched the intent text. Score is neutral."
+      },
+      "notes": {
+        "window": "0:50-1:30",
+        "what_changed": "Region is quieter (20% change in RMS); More dynamic range / less consistent level; Spectral balance shifted darker/warmer; Sparser rhythm (55% fewer onsets/sec)",
+        "what_improved": "No clear improvements aligned with intent detected",
+        "what_got_worse": "No obvious artifacts or regressions detected",
+        "suggested_tweak": "Try being more specific with production terminology in the bracket prompt"
+      }
+    }
+  ],
+  "drift": {
+    "per_anchor": [],
+    "overall_drift": 0.0,
+    "verdict": "LOW"
+  },
+  "slice_files": [],
+  "bank_dir": "./snippet_bank"
+}
