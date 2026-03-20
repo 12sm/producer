@@ -51,12 +51,14 @@ def parse_args(argv=None):
                    help='Save to snippet bank (default: true)')
     p.add_argument('--no-save', dest='save', action='store_false',
                    help='Skip saving to snippet bank')
+    p.add_argument('--source', default='manual', choices=['suno', 'elevenlabs', 'manual'],
+                   help='Audio source platform (default: manual)')
     return p.parse_args(argv)
 
 
 def analyze(original_path, variant_path, bracket_strs, intent,
             prompt_text='', out_dir='./lab_out', bank_dir='./snippet_bank',
-            save=True):
+            save=True, source='manual'):
     """Run full bracket lab analysis and return structured results."""
     y_orig, sr = load_audio(original_path)
     y_var, _ = load_audio(variant_path)
@@ -107,6 +109,7 @@ def analyze(original_path, variant_path, bracket_strs, intent,
         'variant_path': os.path.abspath(variant_path),
         'prompt_text': prompt_text,
         'intent': intent,
+        'source': source,
         'brackets': [{'start': s, 'end': e} for s, e in brackets],
         'anchors': [{'start': s, 'end': e} for s, e in anchors],
         'bracket_results': bracket_results,
@@ -129,6 +132,7 @@ def analyze(original_path, variant_path, bracket_strs, intent,
             'drift_score': drift['overall_drift'],
             'original': original_path,
             'variant': variant_path,
+            'source': source,
         }
         append_index(run_id, summary, bank_dir)
         run_out = os.path.join(out_dir, run_id)
@@ -143,7 +147,7 @@ def main(argv=None):
     result = analyze(
         args.original, args.variant, args.bracket, args.intent,
         prompt_text=args.prompt_text, out_dir=args.out_dir,
-        bank_dir=args.bank_dir, save=args.save,
+        bank_dir=args.bank_dir, save=args.save, source=args.source,
     )
     print(json.dumps(result, indent=2, default=str))
 

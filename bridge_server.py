@@ -24,6 +24,7 @@ the Chrome extension or manual upload — not through this server.
 
 import argparse
 import json
+import mimetypes
 import os
 import sys
 from http.server import HTTPServer, BaseHTTPRequestHandler
@@ -84,6 +85,14 @@ class BridgeHandler(BaseHTTPRequestHandler):
             self._handle_session_get(path, params)
             return
 
+        if path == '/audio':
+            self._handle_audio(params)
+            return
+
+        # Static file serving for UI
+        if self._serve_static(path):
+            return
+
         self._send_json({'error': f'Unknown endpoint: {path}'}, 404)
 
     def do_POST(self):
@@ -100,6 +109,67 @@ class BridgeHandler(BaseHTTPRequestHandler):
             return
 
         self._send_json({'error': f'Unknown endpoint: {path}'}, 404)
+
+    # ── Static / Audio ────────────────────────────────────────────
+
+    def _serve_static(self, path):
+        """Serve built UI assets from ui/dist/. Returns True if handled."""
+        ui_dist = os.path.join(os.path.dirname(__file__), 'ui', 'dist')
+        if not os.path.isdir(ui_dist):
+            return False
+
+        # SPA fallback: serve index.html for non-asset paths
+        if path == '/' or not os.path.splitext(path)[1]:
+            file_path = os.path.join(ui_dist, 'index.html')
+        else:
+            file_path = os.path.join(ui_dist, path.lstrip('/'))
+
+        file_path = os.path.realpath(file_path)
+        if not file_path.startswith(os.path.realpath(ui_dist)):
+            return False
+
+        if not os.path.isfile(file_path):
+            return False
+
+        content_type = mimetypes.guess_type(file_path)[0] or 'application/octet-stream'
+        with open(file_path, 'rb') as f:
+            data = f.read()
+
+        self.send_response(200)
+        self.send_header('Content-Type', content_type)
+        self.send_header('Content-Length', str(len(data)))
+        self.end_headers()
+        self.wfile.write(data)
+        return True
+
+    def _handle_audio(self, params):
+        """Proxy local audio files to the browser."""
+        audio_path = params.get('path', [None])[0]
+        if not audio_path:
+            self._send_json({'error': 'path param required'}, 400)
+            return
+
+        ALLOWED_EXTENSIONS = {'.mp3', '.wav', '.flac', '.ogg', '.m4a'}
+        ext = os.path.splitext(audio_path)[1].lower()
+        if ext not in ALLOWED_EXTENSIONS:
+            self._send_json({'error': f'Unsupported audio type: {ext}'}, 400)
+            return
+
+        audio_path = os.path.realpath(audio_path)
+        if not os.path.isfile(audio_path):
+            self._send_json({'error': 'File not found'}, 404)
+            return
+
+        content_type = mimetypes.guess_type(audio_path)[0] or 'application/octet-stream'
+        with open(audio_path, 'rb') as f:
+            data = f.read()
+
+        self.send_response(200)
+        self.send_header('Content-Type', content_type)
+        self.send_header('Content-Length', str(len(data)))
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.end_headers()
+        self.wfile.write(data)
 
     # ── Handlers ──────────────────────────────────────────────────
 
@@ -121,6 +191,7 @@ class BridgeHandler(BaseHTTPRequestHandler):
                 out_dir=body.get('out_dir', './lab_out'),
                 bank_dir=body.get('bank_dir', './snippet_bank'),
                 save=body.get('save', True),
+                source=body.get('source', 'manual'),
             )
             self._send_json(result)
         except Exception as e:
