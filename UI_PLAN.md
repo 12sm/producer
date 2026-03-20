@@ -426,3 +426,179 @@ python -m tools.analyze --original a.mp3 --variant b.mp3 \
 
 Vite dev server proxies `/api/*` to the bridge server. In production,
 bridge_server.py serves the built `ui/dist/` directly.
+
+---
+
+## Handoff: Combined Next Session Instructions
+
+### What's already done
+
+**Sprint 1-2 complete:**
+- React + Vite + TypeScript + Tailwind (dark theme, monospace)
+- Full API client (`ui/src/api.ts`) matching all bridge server endpoints
+- TypeScript types (`ui/src/types.ts`) mirroring all backend JSON schemas
+- Layout shell with sidebar nav
+- 5 pages: Dashboard, Session Detail, Vocab Explorer, Snippet Bank, Analysis
+- Waveform view with wavesurfer.js, bracket/anchor region overlays, playback
+- Feature delta bar charts, compliance/drift verdict badges
+- Bridge server: `/audio` proxy endpoint, static file serving for `ui/dist/`
+- `source` field (suno/elevenlabs/manual) added to analyze pipeline
+- All 111 Python tests pass, Vite build clean
+
+**Chrome extension (`chrome_ext/`) complete:**
+- Content script injects on suno.com, finds prompt textarea, fills it,
+  clicks generate, waits for audio element, returns URL
+- Background service worker handles job tracking with timeouts
+- Popup shows connection status, bridge server health, logs
+- Communication: Claude Code → bridge server → background.js → content.js → Suno UI
+
+### Phase 1: Verify UI Against Real Data
+
+1. Generate synthetic test audio and populate the snippet bank:
+   ```bash
+   python -c "
+   from tests.conftest import make_test_track, SR
+   import soundfile as sf
+   sf.write('test_original.wav', make_test_track(30.0), SR)
+   sf.write('test_variant.wav', make_test_track(30.0, freq_mod=1.15), SR)
+   "
+   ```
+
+2. Run a few analyses to populate data:
+   ```bash
+   python -m tools.analyze \
+     --original test_original.wav --variant test_variant.wav \
+     --bracket "0:05-0:15" --intent "louder drums, punchy kick" \
+     --source manual
+
+   python -m tools.analyze \
+     --original test_original.wav --variant test_variant.wav \
+     --bracket "0:10-0:20" --intent "brighter hi-hats, crisp" \
+     --source manual
+   ```
+
+3. Init a session and record iterations:
+   ```bash
+   # Use the session endpoints via bridge server or session.py CLI
+   python -m session init \
+     --prompt "test lo-fi beat" \
+     --bracket "0:05-0:15" \
+     --intent "louder drums" \
+     --session-dir ./sessions
+   ```
+
+4. Build the vocab index:
+   ```bash
+   python -m tools.vocab build --bank-dir ./snippet_bank
+   ```
+
+5. Start both servers and verify all 5 pages render correctly:
+   ```bash
+   python bridge_server.py --port 7862 &
+   cd ui && npx vite build && echo "Build OK"
+   # Then curl http://localhost:7862/ to verify static serving
+   ```
+
+6. Fix any rendering issues, data loading errors, or missing fields.
+
+### Phase 2: Waveform Polish
+
+- Sync scroll and zoom between original and variant waveforms
+- Improve bracket region overlay styling (semi-transparent fill,
+  labeled borders, snap to waveform peaks)
+- Add A/B toggle: click bracket region to switch between original
+  and variant playback for that specific region
+- Ensure playback position indicator is visible against dark theme
+
+### Phase 3: Chrome Extension + Suno Live Test
+
+**Goal:** End-to-end test of the full pipeline using real Suno output.
+
+The Chrome extension (`chrome_ext/`) is already built. The bridge server
+already has all the endpoints. What needs testing:
+
+1. **Verify the extension external messaging works.** The bridge server
+   needs a `/generate` endpoint that forwards to the Chrome extension.
+   Currently `bridge_server.py` does NOT have this endpoint — it was
+   removed when we cleaned out the fictional Suno API client. The
+   extension's `background.js` listens for `chrome.runtime.onMessageExternal`
+   but there's no HTTP endpoint to trigger it.
+
+   **Add to bridge_server.py:**
+   ```
+   POST /generate
+   {
+     "prompt": "...",
+     "source": "suno"  // or "elevenlabs" later
+   }
+   ```
+   For source=suno: This should send a message to the Chrome extension.
+   BUT — the bridge server can't directly message Chrome extensions.
+   The architecture is: Chrome extension polls the bridge server for
+   pending jobs, or uses WebSocket. Check `background.js` to see
+   which pattern it expects.
+
+   Actually, looking at the extension code: `background.js` uses
+   `chrome.runtime.onMessageExternal` which means the CALLER needs
+   the extension ID and must be on the extension's `externally_connectable`
+   list. The bridge server is plain HTTP — it can't call Chrome APIs.
+
+   **The real flow for Suno is manual:**
+   1. Claude Code tells the user what prompt to paste into Suno
+   2. User generates on suno.com (extension auto-captures the output)
+   3. User downloads the audio file
+   4. Claude Code runs analysis on the downloaded file
+
+   **OR** the extension captures the audio URL and POSTs it back to
+   the bridge server. Check if `background.js` does this — if it has
+   a fetch/POST back to localhost:7862 with the captured audio.
+
+2. **Test the capture flow:**
+   - Load the extension in Chrome (chrome://extensions, developer mode,
+     load unpacked from `chrome_ext/`)
+   - Navigate to suno.com
+   - Verify popup shows "Connected to Suno"
+   - Generate a track manually
+   - Check if the extension captures the audio URL
+   - Check bridge server logs for any incoming requests
+
+3. **Run bracket lab on real Suno output:**
+   ```bash
+   # After capturing original and variant from Suno:
+   python -m tools.analyze \
+     --original ~/Downloads/suno_original.mp3 \
+     --variant ~/Downloads/suno_variant.mp3 \
+     --bracket "0:30-0:45" \
+     --intent "louder drums, punchy kick" \
+     --source suno
+   ```
+
+4. **Verify UI shows the real analysis:**
+   - Check Dashboard shows the new session
+   - Check Analysis page shows real waveforms (not synthetic)
+   - Check Vocab page updates with new keyword observations
+   - Check Snippet Bank has the new run with source=suno
+
+### Phase 4: Session Runner Integration
+
+Test the full iterative loop:
+1. Init a session with an intent
+2. Generate on Suno with the initial prompt
+3. Run analysis (records as iteration 1)
+4. If FAIL/MIXED — Claude Code suggests a prompt modification
+5. Generate again with the modified prompt
+6. Run analysis (records as iteration 2)
+7. Continue until PASS + LOW drift, then accept
+
+This is the core workflow the entire system was built for. The
+session runner (`session.py`) handles the bookkeeping, the analysis
+tools score each iteration, and the UI shows progress.
+
+### Constraints
+
+- `python -m pytest tests/` must stay green (currently 111 tests)
+- `cd ui && npx vite build` must stay clean
+- Don't modify the Chrome extension unless something is actually broken
+- Keep the bridge server backward-compatible (existing endpoints
+  must keep their signatures)
+
