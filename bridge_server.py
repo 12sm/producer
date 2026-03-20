@@ -1,38 +1,31 @@
 #!/usr/bin/env python3
 """Bridge server — HTTP endpoint that Claude Code talks to.
 
-Routes requests to either the Suno API client or the Chrome extension
-bridge, depending on configuration.
+Exposes bracket lab tools as a local HTTP API. Generation happens
+externally (e.g. via Chrome extension on suno.com) — this server
+handles analysis, listening, search, vocab, and session management.
 
 Usage:
-    # Start with API backend (uses SUNO_API_KEY)
-    python bridge_server.py --backend api
-
-    # Start with Chrome extension backend
-    python bridge_server.py --backend chrome
-
-    # Default port is 7862
+    python bridge_server.py
     python bridge_server.py --port 7862
 
 Endpoints:
-    POST /generate     — Generate a track from a prompt
     POST /analyze      — Run bracket lab analysis
     GET  /listen       — Extract features from audio
     GET  /search       — Search snippet bank
     GET  /vocab        — Query vocabulary index
     GET  /health       — Health check
-    GET  /status/:id   — Check generation status
+    GET  /session      — Session management
+    POST /session/*    — Session init/record/accept
 
-Claude Code calls these endpoints. The server routes to the appropriate
-backend and returns JSON results.
+Claude Code calls these endpoints. Audio generation happens through
+the Chrome extension or manual upload — not through this server.
 """
 
 import argparse
 import json
 import os
 import sys
-import tempfile
-import threading
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 
@@ -72,7 +65,7 @@ class BridgeHandler(BaseHTTPRequestHandler):
         params = parse_qs(parsed.query)
 
         if path == '/health':
-            self._send_json({'status': 'ok', 'backend': self.server.backend})
+            self._send_json({'status': 'ok'})
             return
 
         if path == '/listen':
@@ -98,10 +91,6 @@ class BridgeHandler(BaseHTTPRequestHandler):
         path = parsed.path
         body = self._read_body()
 
-        if path == '/generate':
-            self._handle_generate(body)
-            return
-
         if path == '/analyze':
             self._handle_analyze(body)
             return
@@ -113,26 +102,6 @@ class BridgeHandler(BaseHTTPRequestHandler):
         self._send_json({'error': f'Unknown endpoint: {path}'}, 404)
 
     # ── Handlers ──────────────────────────────────────────────────
-
-    def _handle_generate(self, body):
-        prompt = body.get('prompt')
-        if not prompt:
-            self._send_json({'error': 'prompt is required'}, 400)
-            return
-
-        try:
-            from tools.generate import generate
-            result = generate(
-                prompt=prompt,
-                bracket_inject=body.get('bracket_inject'),
-                intent=body.get('intent'),
-                filename=body.get('filename'),
-                out_dir=body.get('out_dir', './audio'),
-                dry_run=body.get('dry_run', False),
-            )
-            self._send_json(result)
-        except Exception as e:
-            self._send_json({'error': str(e)}, 500)
 
     def _handle_analyze(self, body):
         required = ['original', 'variant', 'brackets', 'intent']
@@ -245,7 +214,6 @@ class BridgeHandler(BaseHTTPRequestHandler):
             else:
                 # List sessions
                 from session import cmd_list
-                import argparse
                 args = argparse.Namespace(session_dir=session_dir)
                 self._send_json(cmd_list(args))
         except Exception as e:
@@ -253,7 +221,6 @@ class BridgeHandler(BaseHTTPRequestHandler):
 
     def _handle_session_post(self, path, body):
         try:
-            import argparse
             session_dir = body.get('session_dir', './sessions')
             parts = path.strip('/').split('/')
             action = parts[1] if len(parts) >= 2 else None
@@ -299,11 +266,9 @@ class BridgeHandler(BaseHTTPRequestHandler):
             self._send_json({'error': str(e)}, 500)
 
 
-def run_server(port=7862, backend='api'):
+def run_server(port=7862):
     server = HTTPServer(('127.0.0.1', port), BridgeHandler)
-    server.backend = backend
-    print(f'Suno Producer Bridge running on http://localhost:{port}')
-    print(f'Backend: {backend}')
+    print(f'Producer Bridge running on http://localhost:{port}')
     print(f'Press Ctrl+C to stop')
     try:
         server.serve_forever()
@@ -313,12 +278,10 @@ def run_server(port=7862, backend='api'):
 
 
 def main():
-    p = argparse.ArgumentParser(description='Suno Producer Bridge Server')
+    p = argparse.ArgumentParser(description='Producer Bridge Server')
     p.add_argument('--port', type=int, default=7862, help='Port (default: 7862)')
-    p.add_argument('--backend', default='api', choices=['api', 'chrome'],
-                   help='Generation backend (default: api)')
     args = p.parse_args()
-    run_server(args.port, args.backend)
+    run_server(args.port)
 
 
 if __name__ == '__main__':

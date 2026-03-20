@@ -161,30 +161,3 @@ class TestSearch:
         assert result['run']['intent'] == 'louder'
 
 
-class TestGenerate:
-    """Tests for tools/generate.py (dry run only — no API calls)."""
-
-    def test_dry_run(self):
-        from tools.generate import generate
-        result = generate(prompt='test prompt', dry_run=True)
-        assert result['dry_run'] is True
-        assert result['prompt'] == 'test prompt'
-        assert result['file'] is None
-
-    def test_dry_run_with_bracket(self):
-        from tools.generate import generate
-        result = generate(
-            prompt='lo-fi beat',
-            bracket_inject='0:30-0:45',
-            intent='louder drums',
-            dry_run=True,
-        )
-        assert result['dry_run'] is True
-        assert 'BRACKET MODIFICATION' in result['prompt']
-        assert 'louder drums' in result['prompt']
-
-    def test_generate_cli_dry_run(self, capsys):
-        from tools.generate import main
-        main(['--prompt', 'test', '--dry-run'])
-        output = json.loads(capsys.readouterr().out)
-        assert output['dry_run'] is True
