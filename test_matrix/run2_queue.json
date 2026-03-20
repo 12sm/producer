@@ -1,0 +1,146 @@
+[
+  {
+    "id": "A1",
+    "batch": 5,
+    "submissions": 5,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Soft Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze\nThe streetlights flicker through the evening haze\nA quiet humming from the alleyways\nI trace the cracks along the cobblestone\nAnd find a kind of peace in being alone",
+    "bracket_desc": "[Soft Verse] — validation run",
+    "status": "pending"
+  },
+  {
+    "id": "A2",
+    "batch": 5,
+    "submissions": 5,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Whispered Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze\nThe streetlights flicker through the evening haze\nA quiet humming from the alleyways\nI trace the cracks along the cobblestone\nAnd find a kind of peace in being alone",
+    "bracket_desc": "[Whispered Verse] — longer lyrics retest",
+    "status": "pending"
+  },
+  {
+    "id": "A3",
+    "batch": 5,
+    "submissions": 5,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze\n\n[Chaos Section]\nThe streetlights flicker through the evening haze\nA quiet humming from the alleyways\nI trace the cracks along the cobblestone\nAnd find a kind of peace in being alone",
+    "bracket_desc": "[Chaos Section] — energy boost validation",
+    "status": "pending"
+  },
+  {
+    "id": "A4",
+    "batch": 5,
+    "submissions": 5,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze\n\n[Ethereal Breakdown]\nThe streetlights flicker through the evening haze\nA quiet humming from the alleyways\nI trace the cracks along the cobblestone\nAnd find a kind of peace in being alone",
+    "bracket_desc": "[Ethereal Breakdown] — sparse rhythm validation",
+    "status": "pending"
+  },
+  {
+    "id": "A5",
+    "batch": 5,
+    "submissions": 5,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Verse 1]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze\n\n[Interlude]\n\n[Verse 2]\nThe streetlights flicker through the evening haze\nA quiet humming from the alleyways\nI trace the cracks along the cobblestone\nAnd find a kind of peace in being alone",
+    "bracket_desc": "[Interlude] — mid-section quieting validation",
+    "status": "pending"
+  },
+  {
+    "id": "A6",
+    "batch": 5,
+    "submissions": 5,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze\n\n[Loud Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take",
+    "bracket_desc": "[Loud Chorus] — compound adjective energy-up test",
+    "status": "pending"
+  },
+  {
+    "id": "A7",
+    "batch": 5,
+    "submissions": 5,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Aggressive Verse]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze\nThe streetlights flicker through the evening haze\nA quiet humming from the alleyways\nI trace the cracks along the cobblestone\nAnd find a kind of peace in being alone",
+    "bracket_desc": "[Aggressive Verse] — compound adjective energy-up test",
+    "status": "pending"
+  },
+  {
+    "id": "A8",
+    "batch": 5,
+    "submissions": 5,
+    "style": "indie rock, male vocals, 120 bpm",
+    "lyrics": "[Gentle Bridge]\nSteel and glass reflecting cold December\nFootsteps on the bridge I still remember\nThe water moves but never really leaves\nLike every promise tangled in the breeze\nThe streetlights flicker through the evening haze\nA quiet humming from the alleyways\nI trace the cracks along the cobblestone\nAnd find a kind of peace in being alone",
+    "bracket_desc": "[Gentle Bridge] — compound adjective energy-down test",
+    "status": "pending"
+  },
+  {
+    "id": "B1",
+    "batch": 6,
+    "submissions": 5,
+    "style": "indie rock, male vocals, 120 bpm, louder drums",
+    "lyrics": "[Verse 1]\nWalking through the city lights again\nEvery street a story I can't explain\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\n[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Verse 2]\nThe morning finds me halfway home\nStatic on the radio, dancing alone\nBut the beat keeps going, the bass stays low\nAnd I'm still chasing what I'll never know\n\n[Outro]\nOne last time before the silence calls\nLet the music carry through these walls",
+    "bracket_desc": "Style keyword: louder drums",
+    "status": "pending"
+  },
+  {
+    "id": "B2",
+    "batch": 6,
+    "submissions": 5,
+    "style": "indie rock, male vocals, 120 bpm, punchy kick",
+    "lyrics": "[Verse 1]\nWalking through the city lights again\nEvery street a story I can't explain\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\n[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Verse 2]\nThe morning finds me halfway home\nStatic on the radio, dancing alone\nBut the beat keeps going, the bass stays low\nAnd I'm still chasing what I'll never know\n\n[Outro]\nOne last time before the silence calls\nLet the music carry through these walls",
+    "bracket_desc": "Style keyword: punchy kick",
+    "status": "pending"
+  },
+  {
+    "id": "B3",
+    "batch": 6,
+    "submissions": 5,
+    "style": "indie rock, male vocals, 120 bpm, brighter mix",
+    "lyrics": "[Verse 1]\nWalking through the city lights again\nEvery street a story I can't explain\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\n[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Verse 2]\nThe morning finds me halfway home\nStatic on the radio, dancing alone\nBut the beat keeps going, the bass stays low\nAnd I'm still chasing what I'll never know\n\n[Outro]\nOne last time before the silence calls\nLet the music carry through these walls",
+    "bracket_desc": "Style keyword: brighter mix",
+    "status": "pending"
+  },
+  {
+    "id": "B4",
+    "batch": 6,
+    "submissions": 5,
+    "style": "indie rock, male vocals, 120 bpm, darker tone",
+    "lyrics": "[Verse 1]\nWalking through the city lights again\nEvery street a story I can't explain\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\n[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Verse 2]\nThe morning finds me halfway home\nStatic on the radio, dancing alone\nBut the beat keeps going, the bass stays low\nAnd I'm still chasing what I'll never know\n\n[Outro]\nOne last time before the silence calls\nLet the music carry through these walls",
+    "bracket_desc": "Style keyword: darker tone",
+    "status": "pending"
+  },
+  {
+    "id": "B5",
+    "batch": 6,
+    "submissions": 5,
+    "style": "indie rock, male vocals, 120 bpm, tight drums",
+    "lyrics": "[Verse 1]\nWalking through the city lights again\nEvery street a story I can't explain\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\n[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Verse 2]\nThe morning finds me halfway home\nStatic on the radio, dancing alone\nBut the beat keeps going, the bass stays low\nAnd I'm still chasing what I'll never know\n\n[Outro]\nOne last time before the silence calls\nLet the music carry through these walls",
+    "bracket_desc": "Style keyword: tight drums",
+    "status": "pending"
+  },
+  {
+    "id": "B6",
+    "batch": 6,
+    "submissions": 5,
+    "style": "indie rock, male vocals, 120 bpm, wide stereo",
+    "lyrics": "[Verse 1]\nWalking through the city lights again\nEvery street a story I can't explain\nThe neon hums a melody I know\nA rhythm pulling me where I need to go\n\n[Chorus]\nI'm caught in the echo of what we made\nA sound that doesn't falter, doesn't fade\nTurn it up and let the whole thing break\nThis is every chance I'm gonna take\n\n[Verse 2]\nThe morning finds me halfway home\nStatic on the radio, dancing alone\nBut the beat keeps going, the bass stays low\nAnd I'm still chasing what I'll never know\n\n[Outro]\nOne last time before the silence calls\nLet the music carry through these walls",
+    "bracket_desc": "Style keyword: wide stereo",
+    "status": "pending"
+  },
+  {
+    "id": "C1",
+    "batch": 7,
+    "submissions": 5,
+    "style": "lo-fi hip hop, female vocals, 85 bpm",
+    "lyrics": "[Soft Verse]\nRain against the window, three AM\nVinyl crackle filling up the den\nCoffee going cold beside the keys\nMelodies like half-remembered dreams\nShadows stretching long across the floor\nNothing left to do but write some more\nThe city hums a lullaby below\nI let the quiet in and let it go",
+    "bracket_desc": "[Soft Verse] — lo-fi genre crosscheck",
+    "status": "pending"
+  },
+  {
+    "id": "C2",
+    "batch": 7,
+    "submissions": 5,
+    "style": "lo-fi hip hop, female vocals, 85 bpm",
+    "lyrics": "[Verse]\nRain against the window, three AM\nVinyl crackle filling up the den\nCoffee going cold beside the keys\nMelodies like half-remembered dreams\n\n[Chaos Section]\nShadows stretching long across the floor\nNothing left to do but write some more\nThe city hums a lullaby below\nI let the quiet in and let it go",
+    "bracket_desc": "[Chaos Section] — lo-fi genre crosscheck",
+    "status": "pending"
+  }
+]
