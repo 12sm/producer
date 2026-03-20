@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Suno Producer Bridge</title>
+  <style>
+    body {
+      width: 320px;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 13px;
+      color: #e0e0e0;
+      background: #1a1a2e;
+    }
+    h1 {
+      font-size: 15px;
+      margin: 0 0 12px 0;
+      color: #fff;
+    }
+    .status {
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      font-size: 12px;
+    }
+    .status.connected {
+      background: #1b4332;
+      border: 1px solid #2d6a4f;
+      color: #95d5b2;
+    }
+    .status.disconnected {
+      background: #3d0000;
+      border: 1px solid #6b0000;
+      color: #ff6b6b;
+    }
+    .info {
+      font-size: 11px;
+      color: #888;
+      line-height: 1.5;
+    }
+    .info code {
+      background: #2a2a3e;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-size: 11px;
+    }
+    .server-section {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #333;
+    }
+    button {
+      background: #4a4ae0;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+    button:hover { background: #5a5af0; }
+    button:disabled { background: #333; color: #666; cursor: not-allowed; }
+    #log {
+      margin-top: 12px;
+      max-height: 120px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 10px;
+      color: #888;
+      background: #0d0d1a;
+      padding: 8px;
+      border-radius: 4px;
+    }
+    #log div { margin-bottom: 2px; }
+  </style>
+</head>
+<body>
+  <h1>Suno Producer Bridge</h1>
+
+  <div id="status" class="status disconnected">
+    Checking connection...
+  </div>
+
+  <div class="info">
+    <p>This extension bridges Claude Code to Suno's web UI for automated music generation.</p>
+    <p><strong>How it works:</strong></p>
+    <ol style="padding-left: 16px; margin: 4px 0;">
+      <li>Open <code>suno.com</code> in a tab</li>
+      <li>Start the local bridge server</li>
+      <li>Claude Code sends prompts via HTTP</li>
+    </ol>
+  </div>
+
+  <div class="server-section">
+    <strong>Local Bridge Server</strong>
+    <div class="info">
+      Run: <code>python bridge_server.py</code><br>
+      Listens on: <code>localhost:7862</code>
+    </div>
+    <button id="testBtn">Test Connection</button>
+  </div>
+
+  <div id="log"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

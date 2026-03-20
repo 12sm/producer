@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Suno Producer Bridge",
+  "version": "0.1.0",
+  "description": "Bridge between Claude Code and Suno's web UI for automated music generation",
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://suno.com/*",
+    "https://app.suno.ai/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://suno.com/*", "https://app.suno.ai/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Suno Producer Bridge"
+  },
+  "externally_connectable": {
+    "ids": ["*"]
+  }
+}
