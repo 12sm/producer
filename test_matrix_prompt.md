@@ -269,12 +269,54 @@ After each generation is downloaded:
    - Does [Guitar Solo] / [Instrumental Break] reliably remove vocals?
    - Does ALL CAPS or parentheses affect vocal delivery?
 
-## Important
+## Execution — Fully Autonomous via Playwright
 
-- Generate songs through the Suno web UI or API — I will handle this
-  manually and drop the audio files into the appropriate directories
-- YOUR job is to: set up the directory structure, prepare all prompt
-  .txt files, and once I drop audio in, run the full analysis pipeline
-  and produce the results report
+You are driving the entire pipeline end-to-end. No human in the loop.
+
+### Suno Generation Loop (per generation):
+1. Open Suno's create page via Playwright (reuse existing browser session)
+2. Paste the style tag: "indie rock, male vocals, 120 bpm"
+3. Toggle "Custom" mode and paste the lyrics/brackets for this generation
+4. Click Create and wait for generation to complete (poll/wait for audio)
+5. Download the generated audio file
+6. Save to `test_matrix/batch{N}/{ID}.wav` (or .mp3, convert if needed)
+7. Save the prompt text to `test_matrix/batch{N}/{ID}_prompt.txt`
+
+### Analysis Loop (after each generation):
+1. Run analysis comparing against the batch's control:
+   ```
+   python -m tools.analyze --original test_matrix/batch1/1A_gen1.wav \
+     --variant test_matrix/batch1/{ID}.wav \
+     --intent "standard structure" --source suno
+   ```
+2. Log results to `test_matrix/batch{N}/{ID}_analysis.json`
+
+### After All Batches Complete:
+1. Create summary report: `test_matrix/RESULTS.md` with a table showing:
+   - Generation ID
+   - Bracket tags used
+   - RMS profile (did energy change at boundaries?)
+   - Spectral centroid shifts (brightness changes?)
+   - Onset density changes (rhythm changes?)
+   - Tempo stability
+   - Whether the tag was "respected" based on measurable differences
+
+2. Key questions to answer in RESULTS.md:
+   - Do brackets cause measurable structural changes vs no-brackets?
+   - Does Suno differentiate between section types (verse vs chorus energy)?
+   - Does wrong bracket order change what Suno generates?
+   - Which modifier tags ([Soft], [Whispered], [Spoken Word]) actually work?
+   - Do made-up tags produce any effect?
+   - Does [Guitar Solo] / [Instrumental Break] reliably remove vocals?
+   - Does ALL CAPS or parentheses affect vocal delivery?
+
+### Pacing & Error Handling:
+- Wait for each Suno generation to fully complete before starting the next
+- If Suno rate-limits you, back off and retry with exponential delay
+- If a generation fails or produces silence, log it and move on
+- Save browser screenshots on failures for debugging
+
+### Constraints:
 - python -m pytest tests/ must stay green throughout
+- Do NOT modify existing project code — only add files in test_matrix/
 ```
