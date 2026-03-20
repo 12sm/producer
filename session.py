@@ -238,13 +238,7 @@ def cmd_list(args):
             try:
                 with open(path, 'r') as f:
                     s = json.load(f)
-                sessions.append({
-                    'session_id': s['session_id'],
-                    'status': s['status'],
-                    'intent': s['intent'],
-                    'iterations': len(s.get('iterations', [])),
-                    'created_at': s['created_at'],
-                })
+                sessions.append(s)
             except (json.JSONDecodeError, IOError, KeyError):
                 continue
 

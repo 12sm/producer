@@ -27,10 +27,18 @@ import json
 import mimetypes
 import os
 import sys
+import threading
+from collections import deque
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 
 sys.path.insert(0, os.path.dirname(__file__))
+
+# In-memory queue for audio captured by the Chrome extension.
+# The extension should POST to /capture with { audioUrl, title, source }.
+# Claude Code polls /jobs to pick up completed captures.
+_capture_lock = threading.Lock()
+_capture_queue: deque = deque(maxlen=50)  # rolling window, newest last
 
 
 class BridgeHandler(BaseHTTPRequestHandler):
@@ -89,6 +97,10 @@ class BridgeHandler(BaseHTTPRequestHandler):
             self._handle_audio(params)
             return
 
+        if path == '/jobs':
+            self._handle_jobs(params)
+            return
+
         # Static file serving for UI
         if self._serve_static(path):
             return
@@ -106,6 +118,10 @@ class BridgeHandler(BaseHTTPRequestHandler):
 
         if path.startswith('/session'):
             self._handle_session_post(path, body)
+            return
+
+        if path == '/capture':
+            self._handle_capture(body)
             return
 
         self._send_json({'error': f'Unknown endpoint: {path}'}, 404)
@@ -335,6 +351,57 @@ class BridgeHandler(BaseHTTPRequestHandler):
                 self._send_json({'error': f'Unknown session action: {action}'}, 400)
         except Exception as e:
             self._send_json({'error': str(e)}, 500)
+
+
+    def _handle_capture(self, body):
+        """Receive an audio capture from the Chrome extension.
+
+        Expected body: { audioUrl, title, source, jobId? }
+
+        The Chrome extension should POST here when it captures a new track
+        from suno.com. Claude Code polls /jobs to pick up results.
+        """
+        audio_url = body.get('audioUrl')
+        if not audio_url:
+            self._send_json({'error': 'audioUrl required'}, 400)
+            return
+
+        from datetime import datetime, timezone
+        entry = {
+            'id': f"cap_{int(datetime.now(timezone.utc).timestamp() * 1000)}",
+            'audioUrl': audio_url,
+            'title': body.get('title', ''),
+            'source': body.get('source', 'suno'),
+            'jobId': body.get('jobId'),
+            'capturedAt': datetime.now(timezone.utc).isoformat(),
+            'consumed': False,
+        }
+
+        with _capture_lock:
+            _capture_queue.append(entry)
+
+        self._send_json({'ok': True, 'id': entry['id']})
+
+    def _handle_jobs(self, params):
+        """List pending audio captures from the Chrome extension.
+
+        Query params:
+          ?pending=1   — only unclaimed captures (default)
+          ?all=1       — all captures in queue
+          ?consume=1   — mark returned items as consumed
+        """
+        consume = 'consume' in params
+        list_all = 'all' in params
+
+        with _capture_lock:
+            items = list(_capture_queue)
+            if not list_all:
+                items = [j for j in items if not j['consumed']]
+            if consume:
+                for item in items:
+                    item['consumed'] = True
+
+        self._send_json({'count': len(items), 'jobs': items})
 
 
 def run_server(port=7862):
